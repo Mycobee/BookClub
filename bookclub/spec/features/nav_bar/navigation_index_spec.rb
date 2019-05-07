@@ -6,10 +6,10 @@ RSpec.describe 'navigation bar', type: :feature do
 
     click_link "Books"
 
-    expect(current_path).to eq("/books")
+    expect(current_path).to eq(books_path)
 
-    click link "Home"
+    click_link "Home"
 
-    expect(current_path).to eq("/")
+    expect(current_path).to eq(home_path)
   end
 end
