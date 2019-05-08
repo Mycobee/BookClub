@@ -4,6 +4,11 @@
     <li><%= book.title %></li>
     <li><%= book.pages %></li>
     <li><%= book.pub_year %></li>
+    <% book.authors.each do |author| %>
+      <% if author.name != @author.name %>
+        <p>Co-Authored by:<%= author.name %></p>
+      <% end  %>
+    <% end  %>
     <img src=<%= book.thumb_url %>alt="book-pic" width=200>
   </ul>
   <% end %>
