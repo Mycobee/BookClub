@@ -31,3 +31,4 @@ RSpec.describe 'book index page', type: :feature do
       expect(page).to have(@author_3.name)
     end
   end
+end 
