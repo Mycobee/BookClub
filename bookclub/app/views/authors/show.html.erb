@@ -1,0 +1,9 @@
+<h1><%= @author.name %></h1>
+  <% @author.books.each do |book| %>
+  <ul class="author-book" id="author-book-<%= book.id %>">
+    <li><%= book.title %></li>
+    <li><%= book.pages %></li>
+    <li><%= book.pub_year %></li>
+    <img src=<%= book.thumb_url %>alt="book-pic" width=200>
+  </ul>
+  <% end %>
