@@ -12,23 +12,23 @@ RSpec.describe 'book index page', type: :feature do
   end
 
   it 'shows all the titles, pub_years, pages, thumb_url and authors' do
+    visit books_path
     within("#book-#{@book_1.id}") do
-      visit books_path
-      expect(page).to have(@book_1.title)
-      expect(page).to have(@book_1.pub_year)
-      expect(page).to have(@book_1.pages)
-      expect(page).to have(@book_1.thumb_url)
-      expect(page).to have(@author_1.name)
-      expect(page).to have(@author_2.name)
+      save_and_open_page
+      expect(page).to have_content(@book_1.title)
+      expect(page).to have_content(@book_1.pub_year)
+      expect(page).to have_content(@book_1.pages)
+      expect(page).to have_content(@book_1.thumb_url)
+      expect(page).to have_content(@author_1.name)
+      expect(page).to have_content(@author_2.name)
     end
 
     within("#book-#{@book_2.id}") do
-      visit books_path
-      expect(page).to have(@book_2.title)
-      expect(page).to have(@book_2.pub_year)
-      expect(page).to have(@book_2.pages)
-      expect(page).to have(@book_2.thumb_url)
-      expect(page).to have(@author_3.name)
+      expect(page).to have_content(@book_2.title)
+      expect(page).to have_content(@book_2.pub_year)
+      expect(page).to have_content(@book_2.pages)
+      expect(page).to have_content(@book_2.thumb_url)
+      expect(page).to have_content(@author_3.name)
     end
   end
-end 
+end
