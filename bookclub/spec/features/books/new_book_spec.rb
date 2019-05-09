@@ -18,7 +18,7 @@ RSpec.describe 'as a user on the book index page', type: :feature do
       expect(current_path).to eq(books_path)
 
       @new_book = Book.last
-      expect(@new_book.name).to eq("Cool Book Name")
+      expect(@new_book.title).to eq("Cool Book Name")
 
       within("#book-#{@new_book.id}") do
         expect(page).to have_content(@new_book.title)
