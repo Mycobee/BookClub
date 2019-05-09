@@ -9,3 +9,14 @@
  <li><%= author.name %></li>
 </ul>
  <% end %>
+
+<h3>Reviews:</h3>
+
+<% @reviews.each do |review|%>
+<ul id="review-<%= review.id %>">
+<li><%= review.heading %></li>
+<li><%= review.user %></li>
+<li><%= review.score %></li>
+<li><%= review.full_review %></li>
+</ul>
+<% end %>
