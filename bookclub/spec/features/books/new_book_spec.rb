@@ -3,7 +3,11 @@ require 'rails_helper'
 RSpec.describe 'as a user on the book index page', type: :feature do
   describe 'I see a link that adds a book' do
     it 'shows a place to enter the title, pages, pub_year, url and submit button' do
-      visit new_book_path
+      visit books_path
+      click_link 'New Book'
+
+      expect(current_path).to eq(new_book_path)
+
       fill_in 'book[title]', with: "Cool Book Name"
       fill_in 'book[pages]', with: 100
       fill_in 'book[pub_year]', with: 1982
