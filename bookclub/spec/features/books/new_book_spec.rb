@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'as a user on the book index page', type: :feature do
   describe 'I see a link that adds a book' do
-    xit 'shows a place to enter the title, pages, pub_year, url and submit button' do
+    it 'shows a place to enter the title, pages, pub_year, url and submit button' do
       visit books_path
       click_link 'New Book'
 
@@ -30,7 +30,7 @@ RSpec.describe 'as a user on the book index page', type: :feature do
       end
     end
 
-    xit 'allows you to add more than one author seperated by commas' do
+    it 'allows you to add more than one author seperated by commas' do
       visit new_book_path
       fill_in 'book[title]', with: "cool book name"
       fill_in 'book[pages]', with: 100
@@ -46,7 +46,7 @@ RSpec.describe 'as a user on the book index page', type: :feature do
       expect(book.authors[1].name).to eq("Biggie")
     end
 
-    xit 'wont accept duplicate authors' do
+    it 'wont accept duplicate authors' do
       visit new_book_path
 
       author = Author.create!(name: "2Pac")
@@ -64,29 +64,29 @@ RSpec.describe 'as a user on the book index page', type: :feature do
     end
 
     it 'wont accept incorrect information' do
-      # visit new_book_path
-      #
-      # fill_in 'book[title]', with: "title"
-      # fill_in 'book[pages]', with: 1000000000
-      # fill_in 'book[pub_year]', with: 1982
-      # fill_in 'book[thumb_url]', with: '/path/to/image.jpg'
-      # fill_in 'book[authors]', with: "2Pac, Biggie"
-      #
-      # click_button "Add a Book"
-      #
-      # expect(Book.all.count).to eq(0)
-      #
-      # visit new_book_path
-      #
-      # fill_in 'book[title]', with: "title"
-      # fill_in 'book[pages]', with: 100
-      # fill_in 'book[pub_year]', with: 1
-      # fill_in 'book[thumb_url]', with: '/path/to/image.jpg'
-      # fill_in 'book[authors]', with: "2Pac, Biggie"
-      #
-      # click_button "Add a Book"
-      #
-      # expect(Book.all.count).to eq(0)
+      visit new_book_path
+
+      fill_in 'book[title]', with: "title"
+      fill_in 'book[pages]', with: 1000000000
+      fill_in 'book[pub_year]', with: 1982
+      fill_in 'book[thumb_url]', with: '/path/to/image.jpg'
+      fill_in 'book[authors]', with: "2Pac, Biggie"
+
+      click_button "Add a Book"
+
+      expect(Book.all.count).to eq(0)
+
+      visit new_book_path
+
+      fill_in 'book[title]', with: "title"
+      fill_in 'book[pages]', with: 100
+      fill_in 'book[pub_year]', with: 1
+      fill_in 'book[thumb_url]', with: '/path/to/image.jpg'
+      fill_in 'book[authors]', with: "2Pac, Biggie"
+
+      click_button "Add a Book"
+
+      expect(Book.all.count).to eq(0)
 
       visit new_book_path
 
@@ -98,10 +98,25 @@ RSpec.describe 'as a user on the book index page', type: :feature do
       fill_in 'book[authors]', with: "2Pac, Biggie"
 
       click_button "Add a Book"
-  
 
       expect(Book.all.count).to eq(1)
 
+    end
+
+    it 'defaults image if no thumbnail included' do
+      visit new_book_path
+
+      fill_in 'book[title]', with: "Book"
+      fill_in 'book[pages]', with: 100
+      fill_in 'book[pub_year]', with: 1991
+      fill_in 'book[thumb_url]', with: ""
+      fill_in 'book[authors]', with: "2Pac, Biggie"
+
+      click_button "Add a Book"
+
+      book = Book.last
+
+      expect(book.thumb_url).to eq("https://i.pinimg.com/236x/cd/d1/30/cdd130816adbd2e8b70c3ed6607fdb0c--clip-art.jpg")
     end
 
   end

@@ -16,7 +16,6 @@ class BooksController < ApplicationController
       book = Book.new(title: book_params[:title], pages: book_params[:pages], pub_year:   book_params[:pub_year], thumb_url: book_params[:thumb_url])
     end
 
-
     new_author_array = []
 
     book_authors_array.each do |book_author|

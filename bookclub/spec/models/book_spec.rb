@@ -17,7 +17,7 @@ RSpec.describe Book, type: :model do
    it {should validate_inclusion_of(:pages).in_range(1..15000)}
    it {should validate_inclusion_of(:pub_year).in_range(1455..2025)}
 
-   it {should validate_uniqueness_of(:title)}
+  # it {should validate_uniqueness_of(:title)}
   end
 
   # describe 'instance methods' do
