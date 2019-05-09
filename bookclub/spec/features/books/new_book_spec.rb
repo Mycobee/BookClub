@@ -30,6 +30,22 @@ RSpec.describe 'as a user on the book index page', type: :feature do
       end
     end
 
+    it 'allows you to add more than one author seperated by commas' do
+      visit new_book_path
+      fill_in 'book[title]', with: "cool book name"
+      fill_in 'book[pages]', with: 100
+      fill_in 'book[pub_year]', with: 1982
+      fill_in 'book[thumb_url]', with: '/path/to/image.jpg'
+      fill_in 'book[authors]', with: "2Pac, Biggie"
+
+      click_button "Add a Book"
+
+      book = Book.last
+
+      expect(book.authors[0].name).to eq("2Pac")
+      expect(book.authors[1].name).to eq("Biggie")
+    end
+
     xit 'wont accept incorrect information' do
       visit new_book_path
 
@@ -37,8 +53,6 @@ RSpec.describe 'as a user on the book index page', type: :feature do
       fill_in 'book[pages]', with: 100
       fill_in 'book[pub_year]', with: 1982
       fill_in 'book[thumb_url]', with: '/path/to/image.jpg'
-
-
     end
 
 
