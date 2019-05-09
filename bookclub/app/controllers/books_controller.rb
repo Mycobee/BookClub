@@ -8,6 +8,11 @@ class BooksController < ApplicationController
     @author = Author.new
   end
 
+  def show
+    @book =  Book.find(params[:id])
+    @authors = @book.authors
+  end
+
   def create
     book_authors_array = book_params[:authors].split(', ')
     book = Book.find_by(title: book_params[:title].titleize)
