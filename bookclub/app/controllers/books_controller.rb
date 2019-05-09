@@ -13,7 +13,11 @@ class BooksController < ApplicationController
     book = Book.find_by(title: book_params[:title].titleize)
 
     if book == nil
-      book = Book.new(title: book_params[:title], pages: book_params[:pages], pub_year:   book_params[:pub_year], thumb_url: book_params[:thumb_url])
+      if book_params[:thumb_url] == ""
+        book = Book.new(title: book_params[:title], pages: book_params[:pages], pub_year:   book_params[:pub_year], thumb_url: "https://i.pinimg.com/236x/cd/d1/30/cdd130816adbd2e8b70c3ed6607fdb0c--clip-art.jpg")
+      else
+        book = Book.new(title: book_params[:title], pages: book_params[:pages], pub_year:   book_params[:pub_year], thumb_url: book_params[:thumb_url])
+      end
     end
 
     new_author_array = []
