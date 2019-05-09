@@ -14,6 +14,12 @@ class BooksController < ApplicationController
     @reviews = @book.reviews
   end
 
+  def destroy
+    book = Book.find(params[:id])
+    book.destroy
+    redirect_to books_path
+  end
+
   def create
     book_authors_array = book_params[:authors].split(', ')
     book = Book.find_by(title: book_params[:title].titleize)
