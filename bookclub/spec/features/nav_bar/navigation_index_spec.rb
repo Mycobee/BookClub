@@ -10,6 +10,6 @@ RSpec.describe 'navigation bar', type: :feature do
 
     click_link "Home"
 
-    expect(current_path).to eq(home_index_path)
+    expect(current_path).to eq(root_path)
   end
 end

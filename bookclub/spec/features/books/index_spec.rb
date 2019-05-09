@@ -14,7 +14,6 @@ RSpec.describe 'book index page', type: :feature do
   it 'shows all the titles, pub_years, pages, thumb_url and authors' do
     visit books_path
     within("#book-#{@book_1.id}") do
-      save_and_open_page
       expect(page).to have_content(@book_1.title)
       expect(page).to have_content(@book_1.pub_year)
       expect(page).to have_content(@book_1.pages)
