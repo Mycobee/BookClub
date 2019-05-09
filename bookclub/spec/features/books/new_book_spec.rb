@@ -13,12 +13,17 @@ RSpec.describe 'as a user on the book index page', type: :feature do
       fill_in 'book[pub_year]', with: 1982
       fill_in 'book[thumb_url]', with: '/path/to/image.jpg'
 
+      author = Author.create!(name: "2Pac")
+      fill_in 'book[authors]', with: author.name
+
       click_button "Add a Book"
 
       expect(current_path).to eq(books_path)
 
       new_book = Book.last
+
       expect(new_book.title).to eq("Cool Book Name")
+      expect(new_book.authors.first.name).to eq(author.name)
 
       within("#book-#{new_book.id}") do
         expect(page).to have_content(new_book.title)
