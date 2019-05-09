@@ -46,13 +46,21 @@ RSpec.describe 'as a user on the book index page', type: :feature do
       expect(book.authors[1].name).to eq("Biggie")
     end
 
-    xit 'wont accept incorrect information' do
+    it 'wont accept incorrect information or duplicate authors' do
       visit new_book_path
+
+      author = Author.create!(name: "2Pac")
 
       fill_in 'book[title]', with: "Cool Book Name"
       fill_in 'book[pages]', with: 100
       fill_in 'book[pub_year]', with: 1982
       fill_in 'book[thumb_url]', with: '/path/to/image.jpg'
+      fill_in 'book[authors]', with: "2Pac, Biggie"
+
+      click_button "Add a Book"
+
+      author_names = Author.pluck(:name)
+      expect(author_names.count).to eq(2)
     end
 
 
