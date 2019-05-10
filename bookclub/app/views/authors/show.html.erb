@@ -12,3 +12,5 @@
     <img src=<%= book.thumb_url %>alt="book-pic" width=200>
   </ul>
   <% end %>
+
+<%= link_to "Delete Author", author_path(@author), method: :delete %>
