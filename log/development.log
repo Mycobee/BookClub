@@ -1,0 +1,285 @@
+  [1m[35m (23.1ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (45.0ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT pg_try_advisory_lock(7967966892840196830)[0m
+  [1m[35m (1.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateBooks (20190506225409)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (40.2ms)[0m  [1m[35mCREATE TABLE "books" ("id" bigserial primary key, "title" character varying, "author" character varying, "pages" integer)[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20190506225409"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2019-05-06 23:33:02.502484"], ["updated_at", "2019-05-06 23:33:02.502484"]]
+  [1m[35m (40.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_advisory_unlock(7967966892840196830)[0m
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(7967966892840196830)[0m
+  [1m[35m (44.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateHome (20190506235013)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (49.1ms)[0m  [1m[35mCREATE TABLE "homes" ("id" bigserial primary key, "books" character varying, "authors" character varying, "reviews" character varying)[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20190506235013"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(7967966892840196830)[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (2.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (216.0ms)[0m  [1m[35mDROP DATABASE IF EXISTS "bookclub_development"[0m
+  [1m[35m (210.0ms)[0m  [1m[35mDROP DATABASE IF EXISTS "bookclub_test"[0m
+  [1m[35m (16.2ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (44.5ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT pg_try_advisory_lock(7967966892840196830)[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateBooks (20190507173936)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (53.1ms)[0m  [1m[35mCREATE TABLE "books" ("id" bigserial primary key, "title" character varying, "pages" integer, "pub_year" integer, "thumb_url" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (3.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20190507173936"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateAuthors (20190507174053)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (4.5ms)[0m  [1m[35mCREATE TABLE "authors" ("id" bigserial primary key, "name" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20190507174053"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateBookAuthors (20190507174149)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (4.8ms)[0m  [1m[35mCREATE TABLE "book_authors" ("id" bigserial primary key, "book_id" bigint, "author_id" bigint, CONSTRAINT "fk_rails_b23f3934c1"
+FOREIGN KEY ("book_id")
+  REFERENCES "books" ("id")
+, CONSTRAINT "fk_rails_0c0759568d"
+FOREIGN KEY ("author_id")
+  REFERENCES "authors" ("id")
+)[0m
+  [1m[35m (1.6ms)[0m  [1m[35mCREATE  INDEX  "index_book_authors_on_book_id" ON "book_authors"  ("book_id")[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE  INDEX  "index_book_authors_on_author_id" ON "book_authors"  ("author_id")[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20190507174149"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateReviews (20190507174304)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(7967966892840196830)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(7967966892840196830)[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateReviews (20190507174304)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (8.4ms)[0m  [1m[35mCREATE TABLE "reviews" ("id" bigserial primary key, "score" integer, "heading" character varying, "full_review" text, "book_id" bigint, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (1.3ms)[0m  [1m[35mCREATE  INDEX  "index_reviews_on_book_id" ON "reviews"  ("book_id")[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20190507174304"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (1.4ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2019-05-07 17:44:46.394456"], ["updated_at", "2019-05-07 17:44:46.394456"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(7967966892840196830)[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/" for ::1 at 2019-05-09 09:22:36 -0600
+  [1m[35m (1.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (0.7ms)
+Completed 200 OK in 170ms (Views: 168.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/books" for ::1 at 2019-05-09 09:22:39 -0600
+Processing by BooksController#index as HTML
+  Rendering books/index.html.erb within layouts/application
+  [1m[36mBook Load (6.7ms)[0m  [1m[34mSELECT "books".* FROM "books"[0m
+  Rendered books/index.html.erb within layouts/application (10.9ms)
+Completed 200 OK in 35ms (Views: 18.4ms | ActiveRecord: 8.2ms)
+
+
+Started GET "/books/new" for ::1 at 2019-05-09 09:22:48 -0600
+Processing by BooksController#new as HTML
+  Rendering books/new.html.erb within layouts/application
+  Rendered books/new.html.erb within layouts/application (62.5ms)
+Completed 200 OK in 78ms (Views: 31.1ms | ActiveRecord: 44.4ms)
+
+
+Started POST "/books" for ::1 at 2019-05-09 09:23:11 -0600
+Processing by BooksController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"K8LCW/hbfjHmyRBZlUssqHS8jh9O0+o6OodkSnrfJ6PI8/4RenLxnYfVCGP2H5GLg+gji/UaMcsqCHJoVUPoJA==", "book"=>{"title"=>"", "pages"=>"123", "pub_year"=>"1928", "thumb_url"=>"hladsafjnsdo.jpg"}, "commit"=>"Add a Book"}
+  [1m[35m (7.7ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (6.8ms)[0m  [1m[32mINSERT INTO "books" ("title", "pages", "pub_year", "thumb_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", ""], ["pages", 123], ["pub_year", 1928], ["thumb_url", "hladsafjnsdo.jpg"], ["created_at", "2019-05-09 15:23:12.020180"], ["updated_at", "2019-05-09 15:23:12.020180"]]
+  [1m[35m (2.7ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/books
+Completed 302 Found in 31ms (ActiveRecord: 17.2ms)
+
+
+Started GET "/books" for ::1 at 2019-05-09 09:23:12 -0600
+Processing by BooksController#index as HTML
+  Rendering books/index.html.erb within layouts/application
+  [1m[36mBook Load (0.2ms)[0m  [1m[34mSELECT "books".* FROM "books"[0m
+  [1m[36mAuthor Load (43.2ms)[0m  [1m[34mSELECT "authors".* FROM "authors" INNER JOIN "book_authors" ON "authors"."id" = "book_authors"."author_id" WHERE "book_authors"."book_id" = $1[0m  [["book_id", 1]]
+  Rendered books/index.html.erb within layouts/application (93.9ms)
+Completed 200 OK in 116ms (Views: 66.4ms | ActiveRecord: 47.1ms)
+
+
+  [1m[36mBook Load (0.3ms)[0m  [1m[34mSELECT  "books".* FROM "books" LIMIT $1[0m  [["LIMIT", 11]]
+Started GET "/" for ::1 at 2019-05-09 10:27:51 -0600
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (1.9ms)
+Completed 200 OK in 38ms (Views: 30.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/books/new" for ::1 at 2019-05-09 10:28:01 -0600
+Processing by BooksController#new as HTML
+  Rendering books/new.html.erb within layouts/application
+  Rendered books/new.html.erb within layouts/application (2.9ms)
+Completed 200 OK in 42ms (Views: 20.0ms | ActiveRecord: 3.5ms)
+
+
+Started POST "/books" for ::1 at 2019-05-09 10:28:20 -0600
+Processing by BooksController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"FL4q8NY3U93jPS5G8SiLanYPEGpJRlLvpw1FFhZQE9j3jxa6VB7ccYIhNnySfDZJgVu9/vKPiR63glM0OczcXw==", "book"=>{"title"=>"Asdjsg", "pages"=>"-4", "pub_year"=>"1928", "thumb_url"=>"adjhf"}, "commit"=>"Add a Book"}
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+Redirected to http://localhost:3000/books
+Completed 302 Found in 6ms (ActiveRecord: 0.7ms)
+
+
+Started GET "/books" for ::1 at 2019-05-09 10:28:20 -0600
+Processing by BooksController#index as HTML
+  Rendering books/index.html.erb within layouts/application
+  [1m[36mBook Load (0.2ms)[0m  [1m[34mSELECT "books".* FROM "books"[0m
+  [1m[36mAuthor Load (0.3ms)[0m  [1m[34mSELECT "authors".* FROM "authors" INNER JOIN "book_authors" ON "authors"."id" = "book_authors"."author_id" WHERE "book_authors"."book_id" = $1[0m  [["book_id", 1]]
+  Rendered books/index.html.erb within layouts/application (19.6ms)
+Completed 200 OK in 35ms (Views: 28.1ms | ActiveRecord: 4.5ms)
+
+
+Started POST "/books" for ::1 at 2019-05-09 10:28:42 -0600
+Processing by BooksController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"FL4q8NY3U93jPS5G8SiLanYPEGpJRlLvpw1FFhZQE9j3jxa6VB7ccYIhNnySfDZJgVu9/vKPiR63glM0OczcXw==", "book"=>{"title"=>"Asdjsg", "pages"=>"128724", "pub_year"=>"1928", "thumb_url"=>"adjhf"}, "commit"=>"Add a Book"}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+Redirected to http://localhost:3000/books
+Completed 302 Found in 8ms (ActiveRecord: 0.5ms)
+
+
+Started GET "/books" for ::1 at 2019-05-09 10:28:42 -0600
+Processing by BooksController#index as HTML
+  Rendering books/index.html.erb within layouts/application
+  [1m[36mBook Load (0.2ms)[0m  [1m[34mSELECT "books".* FROM "books"[0m
+  [1m[36mAuthor Load (0.3ms)[0m  [1m[34mSELECT "authors".* FROM "authors" INNER JOIN "book_authors" ON "authors"."id" = "book_authors"."author_id" WHERE "book_authors"."book_id" = $1[0m  [["book_id", 1]]
+  Rendered books/index.html.erb within layouts/application (2.9ms)
+Completed 200 OK in 23ms (Views: 20.8ms | ActiveRecord: 0.5ms)
+
+
+Started POST "/books" for ::1 at 2019-05-09 10:28:56 -0600
+Processing by BooksController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"FL4q8NY3U93jPS5G8SiLanYPEGpJRlLvpw1FFhZQE9j3jxa6VB7ccYIhNnySfDZJgVu9/vKPiR63glM0OczcXw==", "book"=>{"title"=>"Asdjsg", "pages"=>"187", "pub_year"=>"24", "thumb_url"=>"adjhf"}, "commit"=>"Add a Book"}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+Redirected to http://localhost:3000/books
+Completed 302 Found in 5ms (ActiveRecord: 0.4ms)
+
+
+Started GET "/books" for ::1 at 2019-05-09 10:28:56 -0600
+Processing by BooksController#index as HTML
+  Rendering books/index.html.erb within layouts/application
+  [1m[36mBook Load (0.2ms)[0m  [1m[34mSELECT "books".* FROM "books"[0m
+  [1m[36mAuthor Load (0.3ms)[0m  [1m[34mSELECT "authors".* FROM "authors" INNER JOIN "book_authors" ON "authors"."id" = "book_authors"."author_id" WHERE "book_authors"."book_id" = $1[0m  [["book_id", 1]]
+  Rendered books/index.html.erb within layouts/application (2.7ms)
+Completed 200 OK in 19ms (Views: 17.1ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/books" for ::1 at 2019-05-09 10:29:03 -0600
+Processing by BooksController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"FL4q8NY3U93jPS5G8SiLanYPEGpJRlLvpw1FFhZQE9j3jxa6VB7ccYIhNnySfDZJgVu9/vKPiR63glM0OczcXw==", "book"=>{"title"=>"", "pages"=>"187", "pub_year"=>"24", "thumb_url"=>"adjhf"}, "commit"=>"Add a Book"}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+Redirected to http://localhost:3000/books
+Completed 302 Found in 6ms (ActiveRecord: 0.5ms)
+
+
+Started GET "/books" for ::1 at 2019-05-09 10:29:03 -0600
+Processing by BooksController#index as HTML
+  Rendering books/index.html.erb within layouts/application
+  [1m[36mBook Load (0.3ms)[0m  [1m[34mSELECT "books".* FROM "books"[0m
+  [1m[36mAuthor Load (0.3ms)[0m  [1m[34mSELECT "authors".* FROM "authors" INNER JOIN "book_authors" ON "authors"."id" = "book_authors"."author_id" WHERE "book_authors"."book_id" = $1[0m  [["book_id", 1]]
+  Rendered books/index.html.erb within layouts/application (3.3ms)
+Completed 200 OK in 19ms (Views: 16.6ms | ActiveRecord: 0.6ms)
+
+
+Started POST "/books" for ::1 at 2019-05-09 10:29:19 -0600
+Processing by BooksController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"FL4q8NY3U93jPS5G8SiLanYPEGpJRlLvpw1FFhZQE9j3jxa6VB7ccYIhNnySfDZJgVu9/vKPiR63glM0OczcXw==", "book"=>{"title"=>"Title", "pages"=>"187", "pub_year"=>"1984", "thumb_url"=>"adjhf"}, "commit"=>"Add a Book"}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (1.7ms)[0m  [1m[32mINSERT INTO "books" ("title", "pages", "pub_year", "thumb_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Title"], ["pages", 187], ["pub_year", 1984], ["thumb_url", "adjhf"], ["created_at", "2019-05-09 16:29:19.096750"], ["updated_at", "2019-05-09 16:29:19.096750"]]
+  [1m[35m (40.5ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/books
+Completed 302 Found in 48ms (ActiveRecord: 42.4ms)
+
+
+Started GET "/books" for ::1 at 2019-05-09 10:29:19 -0600
+Processing by BooksController#index as HTML
+  Rendering books/index.html.erb within layouts/application
+  [1m[36mBook Load (0.2ms)[0m  [1m[34mSELECT "books".* FROM "books"[0m
+  [1m[36mAuthor Load (0.3ms)[0m  [1m[34mSELECT "authors".* FROM "authors" INNER JOIN "book_authors" ON "authors"."id" = "book_authors"."author_id" WHERE "book_authors"."book_id" = $1[0m  [["book_id", 1]]
+  [1m[36mAuthor Load (0.2ms)[0m  [1m[34mSELECT "authors".* FROM "authors" INNER JOIN "book_authors" ON "authors"."id" = "book_authors"."author_id" WHERE "book_authors"."book_id" = $1[0m  [["book_id", 2]]
+  Rendered books/index.html.erb within layouts/application (3.6ms)
+Completed 200 OK in 19ms (Views: 15.9ms | ActiveRecord: 0.6ms)
+
+
+  [1m[36mBook Load (0.3ms)[0m  [1m[34mSELECT  "books".* FROM "books" LIMIT $1[0m  [["LIMIT", 11]]
+  [1m[36mBook Load (0.7ms)[0m  [1m[34mSELECT  "books".* FROM "books" LIMIT $1[0m  [["LIMIT", 11]]
+  [1m[36mBook Load (0.5ms)[0m  [1m[34mSELECT "books".* FROM "books"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (7.6ms)[0m  [1m[31mDELETE FROM "books" WHERE "books"."id" = $1[0m  [["id", 1]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[31mDELETE FROM "books" WHERE "books"."id" = $1[0m  [["id", 2]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mBook Load (0.5ms)[0m  [1m[34mSELECT  "books".* FROM "books" LIMIT $1[0m  [["LIMIT", 11]]
+Started GET "/books" for ::1 at 2019-05-09 10:31:34 -0600
+Processing by BooksController#index as HTML
+  Rendering books/index.html.erb within layouts/application
+  [1m[36mBook Load (0.2ms)[0m  [1m[34mSELECT "books".* FROM "books"[0m
+  Rendered books/index.html.erb within layouts/application (1.5ms)
+Completed 200 OK in 24ms (Views: 21.4ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/books" for ::1 at 2019-05-09 12:00:32 -0600
+Processing by BooksController#index as HTML
+  Rendering books/index.html.erb within layouts/application
+  [1m[36mBook Load (0.2ms)[0m  [1m[34mSELECT "books".* FROM "books"[0m
+  Rendered books/index.html.erb within layouts/application (6.0ms)
+Completed 200 OK in 51ms (Views: 32.4ms | ActiveRecord: 1.7ms)
+
+
+Started GET "/books/new" for ::1 at 2019-05-09 12:00:34 -0600
+Processing by BooksController#new as HTML
+  Rendering books/new.html.erb within layouts/application
+  Rendered books/new.html.erb within layouts/application (3.0ms)
+Completed 200 OK in 35ms (Views: 15.6ms | ActiveRecord: 4.3ms)
+
+
+Started POST "/books" for ::1 at 2019-05-09 12:00:47 -0600
+Processing by BooksController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"bjDQrHbhvA52xYrmw2Jf5q7+9o1pxUrPfuSM3MMZmZaNAezm9MgzohfZktygNuLFWapbGdIMkT5ua5r+7IVWEQ==", "book"=>{"title"=>"Title", "pages"=>"123", "pub_year"=>"1928", "thumb_url"=>"hladsafjnsdo.jpg", "author"=>{"name"=>"me"}}, "commit"=>"Add a Book"}
+  [1m[36mAuthor Load (0.6ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = $1 LIMIT $2[0m  [["id", 0], ["LIMIT", 1]]
+Completed 404 Not Found in 6ms (ActiveRecord: 0.6ms)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find Author with 'id'=me):
+  
+app/controllers/books_controller.rb:13:in `create'
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT pg_try_advisory_lock(7967966892840196830)[0m
+  [1m[35m (41.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddUserToReviews (20190509215220)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (44.7ms)[0m  [1m[35mALTER TABLE "reviews" ADD "user" character varying[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20190509215220"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.8ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(7967966892840196830)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
