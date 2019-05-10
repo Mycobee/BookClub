@@ -16,13 +16,13 @@ RSpec.describe 'As a visior on an author show page' do
       visit author_path(@author_1)
 
       click_link "Delete Author"
-      save_and_open_page
 
       expect(current_path).to eq(books_path)
 
       expect(page).to_not have_content(@author_1.name)
       expect(page).to_not have_content(@book_1.title)
       expect(page).to have_content(@book_2.title)
+      expect(Author.all.count).to eq(1)
     end
   end
 end
