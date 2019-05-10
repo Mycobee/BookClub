@@ -4,5 +4,5 @@ Rails.application.routes.draw do
   # get '/home', to: 'home#index', as: 'home'
   resources :books, only: [:index, :new, :create, :show, :destroy]
 
-  resources :authors, only: [:show]
+  resources :authors, only: [:show, :destroy]
 end
