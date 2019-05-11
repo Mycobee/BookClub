@@ -1,0 +1,12 @@
+<% @reviews.each do |review| %>
+<section id="review-<%= review.id %>" >
+  <%= review.user %>
+  <%= review.heading %>
+  <%= review.full_review %>
+  <%= review.score %>
+  <%= review.book.title %>
+  <%= review.book.thumb_url %>
+  <%= review.created_at %>
+
+</section>
+<% end  %>
