@@ -5,7 +5,7 @@
   <%= review.full_review %>
   <%= review.score %>
   <%= review.book.title %>
-  <%= review.book.thumb_url %>
+<img src="<%= review.book.thumb_url %>" alt="reviewbook-<%= review.book.id %>">
   <%= review.created_at %>
 
 </section>

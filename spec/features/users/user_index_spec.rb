@@ -18,7 +18,7 @@ RSpec.describe 'As a visitor on a book show page' do
 
     end
 
-    xit 'takes me to a user show page containing all headings, full reviews, scores, book titles, thumbnails, and review dates' do
+    it 'takes me to a user show page containing all headings, full reviews, scores, book titles, thumbnails, and review dates' do
 
       expect(current_path).to eq(reviews_path)
 
@@ -28,8 +28,8 @@ RSpec.describe 'As a visitor on a book show page' do
         expect(page).to have_content(@review_1.full_review)
         expect(page).to have_content(@review_1.score)
         expect(page).to have_content(@book_1.title)
-        expect(page).to have_content(@book_1.thumb_url)
         expect(page).to have_content(@review_1.created_at)
+        expect(page).to have_css("img[src*='#{@book_1.thumb_url}']")
       end
 
       within("#review-#{@review_2.id}") do
@@ -37,16 +37,13 @@ RSpec.describe 'As a visitor on a book show page' do
         expect(page).to have_content(@review_2.full_review)
         expect(page).to have_content(@review_2.score)
         expect(page).to have_content(@book_2.title)
-        expect(page).to have_content(@book_2.thumb_url)
         expect(page).to have_content(@review_2.created_at)
+        expect(page).to have_css("img[src*='#{@book_2.thumb_url}']")
       end
     end
 
     it 'should not show reviews from other users' do
-      
         expect(page).to_not have_content(@review_3.heading)
-        expect(page).to_not have_content(@review_3.full_review)
-        expect(page).to_not have_content(@review_3.score)
     end
   end
 end
