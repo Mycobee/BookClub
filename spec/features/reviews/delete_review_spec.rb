@@ -22,8 +22,9 @@ RSpec.describe 'As a visitor on a user show page' do
       end
 
       expect(current_path).to eq(reviews_path)
+
       expect(page).to_not have_content(@review_1.heading)
-      expect(page).to have_content(@review_2.heading)
+      expect(Review.all.count).to eq(1)
     end
   end
 end
