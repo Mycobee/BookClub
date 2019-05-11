@@ -9,7 +9,7 @@
 <%= f.text_field :full_review %>
 
 <%= f.label :score %>
-<%= f.text_field :score %>
+<%= f.number_field :score, min: 1, max: 5 %>
 
 
 <%= f.submit 'Add a Review' %>

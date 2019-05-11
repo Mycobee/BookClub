@@ -29038,3 +29038,444 @@ Completed 200 OK in 7ms (Views: 4.4ms | ActiveRecord: 1.2ms)
   [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "reviews"[0m
   [1m[36mReview Load (0.2ms)[0m  [1m[34mSELECT  "reviews".* FROM "reviews" ORDER BY "reviews"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
   [1m[35m (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mBook Exists (0.5ms)[0m  [1m[34mSELECT  1 AS one FROM "books" WHERE "books"."title" = $1 LIMIT $2[0m  [["title", "The Hobbit"], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "books" ("title", "pages", "pub_year", "thumb_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "The Hobbit"], ["pages", 310], ["pub_year", 1937], ["thumb_url", "this_is_a_test_url"], ["created_at", "2019-05-11 18:38:16.234236"], ["updated_at", "2019-05-11 18:38:16.234236"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "authors" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "J.R.R. Tolkien"], ["created_at", "2019-05-11 18:38:16.259071"], ["updated_at", "2019-05-11 18:38:16.259071"]]
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "book_authors" ("book_id", "author_id") VALUES ($1, $2) RETURNING "id"[0m  [["book_id", 30], ["author_id", 30]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/books/30" for 127.0.0.1 at 2019-05-11 12:38:16 -0600
+Processing by BooksController#show as HTML
+  Parameters: {"id"=>"30"}
+  [1m[36mBook Load (0.2ms)[0m  [1m[34mSELECT  "books".* FROM "books" WHERE "books"."id" = $1 LIMIT $2[0m  [["id", 30], ["LIMIT", 1]]
+  Rendering books/show.html.erb within layouts/application
+  [1m[36mAuthor Load (0.4ms)[0m  [1m[34mSELECT "authors".* FROM "authors" INNER JOIN "book_authors" ON "authors"."id" = "book_authors"."author_id" WHERE "book_authors"."book_id" = $1[0m  [["book_id", 30]]
+  [1m[36mReview Load (0.3ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."book_id" = $1[0m  [["book_id", 30]]
+  Rendered books/show.html.erb within layouts/application (14.4ms)
+Completed 200 OK in 136ms (Views: 125.1ms | ActiveRecord: 1.9ms)
+Started GET "/books/30/reviews/new" for 127.0.0.1 at 2019-05-11 12:38:16 -0600
+Processing by ReviewsController#new as HTML
+  Parameters: {"book_id"=>"30"}
+  [1m[36mBook Load (0.4ms)[0m  [1m[34mSELECT  "books".* FROM "books" WHERE "books"."id" = $1 LIMIT $2[0m  [["id", 30], ["LIMIT", 1]]
+  Rendering reviews/new.html.erb within layouts/application
+  Rendered reviews/new.html.erb within layouts/application (17.5ms)
+Completed 200 OK in 29ms (Views: 20.6ms | ActiveRecord: 2.0ms)
+Started POST "/books/30/reviews" for 127.0.0.1 at 2019-05-11 12:38:16 -0600
+Processing by ReviewsController#create as HTML
+  Parameters: {"utf8"=>"✓", "review"=>{"user"=>"Mills", "heading"=>"Review of Book", "full_review"=>"OMG, love this book!!!!!!!!!!!!!!!!!!!", "score"=>"5"}, "commit"=>"Add a Review", "book_id"=>"30"}
+  [1m[36mBook Load (0.4ms)[0m  [1m[34mSELECT  "books".* FROM "books" WHERE "books"."id" = $1 LIMIT $2[0m  [["id", 30], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (1.1ms)[0m  [1m[32mINSERT INTO "reviews" ("score", "heading", "full_review", "book_id", "created_at", "updated_at", "user") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["score", 5], ["heading", "Review of Book"], ["full_review", "OMG, love this book!!!!!!!!!!!!!!!!!!!"], ["book_id", 30], ["created_at", "2019-05-11 18:38:16.481270"], ["updated_at", "2019-05-11 18:38:16.481270"], ["user", "Mills"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/books/30
+Completed 302 Found in 9ms (ActiveRecord: 1.8ms)
+Started GET "/books/30" for 127.0.0.1 at 2019-05-11 12:38:16 -0600
+Processing by BooksController#show as HTML
+  Parameters: {"id"=>"30"}
+  [1m[36mBook Load (0.3ms)[0m  [1m[34mSELECT  "books".* FROM "books" WHERE "books"."id" = $1 LIMIT $2[0m  [["id", 30], ["LIMIT", 1]]
+  Rendering books/show.html.erb within layouts/application
+  [1m[36mAuthor Load (0.4ms)[0m  [1m[34mSELECT "authors".* FROM "authors" INNER JOIN "book_authors" ON "authors"."id" = "book_authors"."author_id" WHERE "book_authors"."book_id" = $1[0m  [["book_id", 30]]
+  [1m[36mReview Load (0.2ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."book_id" = $1[0m  [["book_id", 30]]
+  Rendered books/show.html.erb within layouts/application (3.8ms)
+Completed 200 OK in 7ms (Views: 5.2ms | ActiveRecord: 0.8ms)
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "reviews"[0m
+  [1m[36mReview Load (0.2ms)[0m  [1m[34mSELECT  "reviews".* FROM "reviews" ORDER BY "reviews"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mBook Exists (0.5ms)[0m  [1m[34mSELECT  1 AS one FROM "books" WHERE "books"."title" = $1 LIMIT $2[0m  [["title", "The Hobbit"], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "books" ("title", "pages", "pub_year", "thumb_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "The Hobbit"], ["pages", 310], ["pub_year", 1937], ["thumb_url", "this_is_a_test_url"], ["created_at", "2019-05-11 18:39:17.228550"], ["updated_at", "2019-05-11 18:39:17.228550"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "authors" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "J.R.R. Tolkien"], ["created_at", "2019-05-11 18:39:17.253523"], ["updated_at", "2019-05-11 18:39:17.253523"]]
+  [1m[35mSQL (0.8ms)[0m  [1m[32mINSERT INTO "book_authors" ("book_id", "author_id") VALUES ($1, $2) RETURNING "id"[0m  [["book_id", 31], ["author_id", 31]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/books/31" for 127.0.0.1 at 2019-05-11 12:39:17 -0600
+Processing by BooksController#show as HTML
+  Parameters: {"id"=>"31"}
+  [1m[36mBook Load (0.2ms)[0m  [1m[34mSELECT  "books".* FROM "books" WHERE "books"."id" = $1 LIMIT $2[0m  [["id", 31], ["LIMIT", 1]]
+  Rendering books/show.html.erb within layouts/application
+  [1m[36mAuthor Load (0.4ms)[0m  [1m[34mSELECT "authors".* FROM "authors" INNER JOIN "book_authors" ON "authors"."id" = "book_authors"."author_id" WHERE "book_authors"."book_id" = $1[0m  [["book_id", 31]]
+  [1m[36mReview Load (0.3ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."book_id" = $1[0m  [["book_id", 31]]
+  Rendered books/show.html.erb within layouts/application (14.4ms)
+Completed 200 OK in 135ms (Views: 124.6ms | ActiveRecord: 1.9ms)
+Started GET "/books/31/reviews/new" for 127.0.0.1 at 2019-05-11 12:39:17 -0600
+Processing by ReviewsController#new as HTML
+  Parameters: {"book_id"=>"31"}
+  [1m[36mBook Load (0.3ms)[0m  [1m[34mSELECT  "books".* FROM "books" WHERE "books"."id" = $1 LIMIT $2[0m  [["id", 31], ["LIMIT", 1]]
+  Rendering reviews/new.html.erb within layouts/application
+  Rendered reviews/new.html.erb within layouts/application (11.7ms)
+Completed 200 OK in 28ms (Views: 15.5ms | ActiveRecord: 2.0ms)
+Started POST "/books/31/reviews" for 127.0.0.1 at 2019-05-11 12:39:17 -0600
+Processing by ReviewsController#create as HTML
+  Parameters: {"utf8"=>"✓", "review"=>{"user"=>"Mills", "heading"=>"Review of Book", "full_review"=>"OMG, love this book!!!!!!!!!!!!!!!!!!!", "score"=>"5"}, "commit"=>"Add a Review", "book_id"=>"31"}
+  [1m[36mBook Load (0.2ms)[0m  [1m[34mSELECT  "books".* FROM "books" WHERE "books"."id" = $1 LIMIT $2[0m  [["id", 31], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "reviews" ("score", "heading", "full_review", "book_id", "created_at", "updated_at", "user") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["score", 5], ["heading", "Review of Book"], ["full_review", "OMG, love this book!!!!!!!!!!!!!!!!!!!"], ["book_id", 31], ["created_at", "2019-05-11 18:39:17.466031"], ["updated_at", "2019-05-11 18:39:17.466031"], ["user", "Mills"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/books/31
+Completed 302 Found in 6ms (ActiveRecord: 0.9ms)
+Started GET "/books/31" for 127.0.0.1 at 2019-05-11 12:39:17 -0600
+Processing by BooksController#show as HTML
+  Parameters: {"id"=>"31"}
+  [1m[36mBook Load (0.2ms)[0m  [1m[34mSELECT  "books".* FROM "books" WHERE "books"."id" = $1 LIMIT $2[0m  [["id", 31], ["LIMIT", 1]]
+  Rendering books/show.html.erb within layouts/application
+  [1m[36mAuthor Load (0.3ms)[0m  [1m[34mSELECT "authors".* FROM "authors" INNER JOIN "book_authors" ON "authors"."id" = "book_authors"."author_id" WHERE "book_authors"."book_id" = $1[0m  [["book_id", 31]]
+  [1m[36mReview Load (0.2ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."book_id" = $1[0m  [["book_id", 31]]
+  Rendered books/show.html.erb within layouts/application (3.5ms)
+Completed 200 OK in 6ms (Views: 4.3ms | ActiveRecord: 0.8ms)
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "reviews"[0m
+  [1m[36mReview Load (0.2ms)[0m  [1m[34mSELECT  "reviews".* FROM "reviews" ORDER BY "reviews"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mBook Exists (0.5ms)[0m  [1m[34mSELECT  1 AS one FROM "books" WHERE "books"."title" = $1 LIMIT $2[0m  [["title", "The Hobbit"], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "books" ("title", "pages", "pub_year", "thumb_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "The Hobbit"], ["pages", 310], ["pub_year", 1937], ["thumb_url", "this_is_a_test_url"], ["created_at", "2019-05-11 18:40:13.471138"], ["updated_at", "2019-05-11 18:40:13.471138"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "authors" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "J.R.R. Tolkien"], ["created_at", "2019-05-11 18:40:13.494658"], ["updated_at", "2019-05-11 18:40:13.494658"]]
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "book_authors" ("book_id", "author_id") VALUES ($1, $2) RETURNING "id"[0m  [["book_id", 32], ["author_id", 32]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/books/32" for 127.0.0.1 at 2019-05-11 12:40:13 -0600
+Processing by BooksController#show as HTML
+  Parameters: {"id"=>"32"}
+  [1m[36mBook Load (0.2ms)[0m  [1m[34mSELECT  "books".* FROM "books" WHERE "books"."id" = $1 LIMIT $2[0m  [["id", 32], ["LIMIT", 1]]
+  Rendering books/show.html.erb within layouts/application
+  [1m[36mAuthor Load (0.4ms)[0m  [1m[34mSELECT "authors".* FROM "authors" INNER JOIN "book_authors" ON "authors"."id" = "book_authors"."author_id" WHERE "book_authors"."book_id" = $1[0m  [["book_id", 32]]
+  [1m[36mReview Load (0.3ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."book_id" = $1[0m  [["book_id", 32]]
+  Rendered books/show.html.erb within layouts/application (9.7ms)
+Completed 200 OK in 149ms (Views: 140.8ms | ActiveRecord: 1.9ms)
+Started GET "/books/32/reviews/new" for 127.0.0.1 at 2019-05-11 12:40:13 -0600
+Processing by ReviewsController#new as HTML
+  Parameters: {"book_id"=>"32"}
+  [1m[36mBook Load (0.3ms)[0m  [1m[34mSELECT  "books".* FROM "books" WHERE "books"."id" = $1 LIMIT $2[0m  [["id", 32], ["LIMIT", 1]]
+  Rendering reviews/new.html.erb within layouts/application
+  Rendered reviews/new.html.erb within layouts/application (13.7ms)
+Completed 200 OK in 26ms (Views: 16.7ms | ActiveRecord: 1.8ms)
+Started POST "/books/32/reviews" for 127.0.0.1 at 2019-05-11 12:40:13 -0600
+Processing by ReviewsController#create as HTML
+  Parameters: {"utf8"=>"✓", "review"=>{"user"=>"Mills", "heading"=>"Review of Book", "full_review"=>"OMG, love this book!!!!!!!!!!!!!!!!!!!", "score"=>"6"}, "commit"=>"Add a Review", "book_id"=>"32"}
+  [1m[36mBook Load (0.3ms)[0m  [1m[34mSELECT  "books".* FROM "books" WHERE "books"."id" = $1 LIMIT $2[0m  [["id", 32], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "reviews" ("score", "heading", "full_review", "book_id", "created_at", "updated_at", "user") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["score", 6], ["heading", "Review of Book"], ["full_review", "OMG, love this book!!!!!!!!!!!!!!!!!!!"], ["book_id", 32], ["created_at", "2019-05-11 18:40:13.718084"], ["updated_at", "2019-05-11 18:40:13.718084"], ["user", "Mills"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/books/32
+Completed 302 Found in 6ms (ActiveRecord: 1.0ms)
+Started GET "/books/32" for 127.0.0.1 at 2019-05-11 12:40:13 -0600
+Processing by BooksController#show as HTML
+  Parameters: {"id"=>"32"}
+  [1m[36mBook Load (0.2ms)[0m  [1m[34mSELECT  "books".* FROM "books" WHERE "books"."id" = $1 LIMIT $2[0m  [["id", 32], ["LIMIT", 1]]
+  Rendering books/show.html.erb within layouts/application
+  [1m[36mAuthor Load (0.3ms)[0m  [1m[34mSELECT "authors".* FROM "authors" INNER JOIN "book_authors" ON "authors"."id" = "book_authors"."author_id" WHERE "book_authors"."book_id" = $1[0m  [["book_id", 32]]
+  [1m[36mReview Load (0.2ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."book_id" = $1[0m  [["book_id", 32]]
+  Rendered books/show.html.erb within layouts/application (3.5ms)
+Completed 200 OK in 6ms (Views: 4.3ms | ActiveRecord: 0.8ms)
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "reviews"[0m
+  [1m[36mReview Load (0.2ms)[0m  [1m[34mSELECT  "reviews".* FROM "reviews" ORDER BY "reviews"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mBook Exists (0.5ms)[0m  [1m[34mSELECT  1 AS one FROM "books" WHERE "books"."title" = $1 LIMIT $2[0m  [["title", "The Hobbit"], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "books" ("title", "pages", "pub_year", "thumb_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "The Hobbit"], ["pages", 310], ["pub_year", 1937], ["thumb_url", "this_is_a_test_url"], ["created_at", "2019-05-11 18:40:39.112480"], ["updated_at", "2019-05-11 18:40:39.112480"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "authors" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "J.R.R. Tolkien"], ["created_at", "2019-05-11 18:40:39.136258"], ["updated_at", "2019-05-11 18:40:39.136258"]]
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "book_authors" ("book_id", "author_id") VALUES ($1, $2) RETURNING "id"[0m  [["book_id", 33], ["author_id", 33]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/books/33" for 127.0.0.1 at 2019-05-11 12:40:39 -0600
+Processing by BooksController#show as HTML
+  Parameters: {"id"=>"33"}
+  [1m[36mBook Load (0.2ms)[0m  [1m[34mSELECT  "books".* FROM "books" WHERE "books"."id" = $1 LIMIT $2[0m  [["id", 33], ["LIMIT", 1]]
+  Rendering books/show.html.erb within layouts/application
+  [1m[36mAuthor Load (0.4ms)[0m  [1m[34mSELECT "authors".* FROM "authors" INNER JOIN "book_authors" ON "authors"."id" = "book_authors"."author_id" WHERE "book_authors"."book_id" = $1[0m  [["book_id", 33]]
+  [1m[36mReview Load (0.3ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."book_id" = $1[0m  [["book_id", 33]]
+  Rendered books/show.html.erb within layouts/application (13.7ms)
+Completed 200 OK in 148ms (Views: 139.7ms | ActiveRecord: 2.1ms)
+Started GET "/books/33/reviews/new" for 127.0.0.1 at 2019-05-11 12:40:39 -0600
+Processing by ReviewsController#new as HTML
+  Parameters: {"book_id"=>"33"}
+  [1m[36mBook Load (0.3ms)[0m  [1m[34mSELECT  "books".* FROM "books" WHERE "books"."id" = $1 LIMIT $2[0m  [["id", 33], ["LIMIT", 1]]
+  Rendering reviews/new.html.erb within layouts/application
+  Rendered reviews/new.html.erb within layouts/application (11.5ms)
+Completed 200 OK in 28ms (Views: 14.8ms | ActiveRecord: 2.7ms)
+Started POST "/books/33/reviews" for 127.0.0.1 at 2019-05-11 12:40:39 -0600
+Processing by ReviewsController#create as HTML
+  Parameters: {"utf8"=>"✓", "review"=>{"user"=>"Mills", "heading"=>"Review of Book", "full_review"=>"OMG, love this book!!!!!!!!!!!!!!!!!!!", "score"=>"100"}, "commit"=>"Add a Review", "book_id"=>"33"}
+  [1m[36mBook Load (1.1ms)[0m  [1m[34mSELECT  "books".* FROM "books" WHERE "books"."id" = $1 LIMIT $2[0m  [["id", 33], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.9ms)[0m  [1m[32mINSERT INTO "reviews" ("score", "heading", "full_review", "book_id", "created_at", "updated_at", "user") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["score", 100], ["heading", "Review of Book"], ["full_review", "OMG, love this book!!!!!!!!!!!!!!!!!!!"], ["book_id", 33], ["created_at", "2019-05-11 18:40:39.363386"], ["updated_at", "2019-05-11 18:40:39.363386"], ["user", "Mills"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/books/33
+Completed 302 Found in 9ms (ActiveRecord: 2.3ms)
+Started GET "/books/33" for 127.0.0.1 at 2019-05-11 12:40:39 -0600
+Processing by BooksController#show as HTML
+  Parameters: {"id"=>"33"}
+  [1m[36mBook Load (0.4ms)[0m  [1m[34mSELECT  "books".* FROM "books" WHERE "books"."id" = $1 LIMIT $2[0m  [["id", 33], ["LIMIT", 1]]
+  Rendering books/show.html.erb within layouts/application
+  [1m[36mAuthor Load (0.4ms)[0m  [1m[34mSELECT "authors".* FROM "authors" INNER JOIN "book_authors" ON "authors"."id" = "book_authors"."author_id" WHERE "book_authors"."book_id" = $1[0m  [["book_id", 33]]
+  [1m[36mReview Load (0.4ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."book_id" = $1[0m  [["book_id", 33]]
+  Rendered books/show.html.erb within layouts/application (4.4ms)
+Completed 200 OK in 9ms (Views: 6.5ms | ActiveRecord: 1.2ms)
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT COUNT(*) FROM "reviews"[0m
+  [1m[36mReview Load (0.3ms)[0m  [1m[34mSELECT  "reviews".* FROM "reviews" ORDER BY "reviews"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mBook Exists (0.5ms)[0m  [1m[34mSELECT  1 AS one FROM "books" WHERE "books"."title" = $1 LIMIT $2[0m  [["title", "The Hobbit"], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "books" ("title", "pages", "pub_year", "thumb_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "The Hobbit"], ["pages", 310], ["pub_year", 1937], ["thumb_url", "this_is_a_test_url"], ["created_at", "2019-05-11 18:42:30.486853"], ["updated_at", "2019-05-11 18:42:30.486853"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "authors" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "J.R.R. Tolkien"], ["created_at", "2019-05-11 18:42:30.517999"], ["updated_at", "2019-05-11 18:42:30.517999"]]
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "book_authors" ("book_id", "author_id") VALUES ($1, $2) RETURNING "id"[0m  [["book_id", 34], ["author_id", 34]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/books/34" for 127.0.0.1 at 2019-05-11 12:42:30 -0600
+Processing by BooksController#show as HTML
+  Parameters: {"id"=>"34"}
+  [1m[36mBook Load (0.2ms)[0m  [1m[34mSELECT  "books".* FROM "books" WHERE "books"."id" = $1 LIMIT $2[0m  [["id", 34], ["LIMIT", 1]]
+  Rendering books/show.html.erb within layouts/application
+  [1m[36mAuthor Load (0.4ms)[0m  [1m[34mSELECT "authors".* FROM "authors" INNER JOIN "book_authors" ON "authors"."id" = "book_authors"."author_id" WHERE "book_authors"."book_id" = $1[0m  [["book_id", 34]]
+  [1m[36mReview Load (0.3ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."book_id" = $1[0m  [["book_id", 34]]
+  Rendered books/show.html.erb within layouts/application (14.5ms)
+Completed 200 OK in 125ms (Views: 114.3ms | ActiveRecord: 1.9ms)
+Started GET "/books/34/reviews/new" for 127.0.0.1 at 2019-05-11 12:42:30 -0600
+Processing by ReviewsController#new as HTML
+  Parameters: {"book_id"=>"34"}
+  [1m[36mBook Load (0.3ms)[0m  [1m[34mSELECT  "books".* FROM "books" WHERE "books"."id" = $1 LIMIT $2[0m  [["id", 34], ["LIMIT", 1]]
+  Rendering reviews/new.html.erb within layouts/application
+  Rendered reviews/new.html.erb within layouts/application (10.1ms)
+Completed 200 OK in 22ms (Views: 13.2ms | ActiveRecord: 1.7ms)
+Started POST "/books/34/reviews" for 127.0.0.1 at 2019-05-11 12:42:30 -0600
+Processing by ReviewsController#create as HTML
+  Parameters: {"utf8"=>"✓", "review"=>{"user"=>"Mills", "heading"=>"Review of Book", "full_review"=>"OMG, love this book!!!!!!!!!!!!!!!!!!!", "score"=>"35"}, "commit"=>"Add a Review", "book_id"=>"34"}
+  [1m[36mBook Load (0.4ms)[0m  [1m[34mSELECT  "books".* FROM "books" WHERE "books"."id" = $1 LIMIT $2[0m  [["id", 34], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "reviews" ("score", "heading", "full_review", "book_id", "created_at", "updated_at", "user") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["score", 35], ["heading", "Review of Book"], ["full_review", "OMG, love this book!!!!!!!!!!!!!!!!!!!"], ["book_id", 34], ["created_at", "2019-05-11 18:42:30.726546"], ["updated_at", "2019-05-11 18:42:30.726546"], ["user", "Mills"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/books/34
+Completed 302 Found in 20ms (ActiveRecord: 1.2ms)
+Started GET "/books/34" for 127.0.0.1 at 2019-05-11 12:42:30 -0600
+Processing by BooksController#show as HTML
+  Parameters: {"id"=>"34"}
+  [1m[36mBook Load (0.3ms)[0m  [1m[34mSELECT  "books".* FROM "books" WHERE "books"."id" = $1 LIMIT $2[0m  [["id", 34], ["LIMIT", 1]]
+  Rendering books/show.html.erb within layouts/application
+  [1m[36mAuthor Load (0.4ms)[0m  [1m[34mSELECT "authors".* FROM "authors" INNER JOIN "book_authors" ON "authors"."id" = "book_authors"."author_id" WHERE "book_authors"."book_id" = $1[0m  [["book_id", 34]]
+  [1m[36mReview Load (0.3ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."book_id" = $1[0m  [["book_id", 34]]
+  Rendered books/show.html.erb within layouts/application (4.2ms)
+Completed 200 OK in 8ms (Views: 5.7ms | ActiveRecord: 1.0ms)
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "reviews"[0m
+  [1m[36mReview Load (0.2ms)[0m  [1m[34mSELECT  "reviews".* FROM "reviews" ORDER BY "reviews"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[35m (0.6ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mBook Exists (0.5ms)[0m  [1m[34mSELECT  1 AS one FROM "books" WHERE "books"."title" = $1 LIMIT $2[0m  [["title", "The Hobbit"], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "books" ("title", "pages", "pub_year", "thumb_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "The Hobbit"], ["pages", 310], ["pub_year", 1937], ["thumb_url", "this_is_a_test_url"], ["created_at", "2019-05-11 18:44:09.543246"], ["updated_at", "2019-05-11 18:44:09.543246"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "authors" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "J.R.R. Tolkien"], ["created_at", "2019-05-11 18:44:09.569918"], ["updated_at", "2019-05-11 18:44:09.569918"]]
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "book_authors" ("book_id", "author_id") VALUES ($1, $2) RETURNING "id"[0m  [["book_id", 35], ["author_id", 35]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/books/35" for 127.0.0.1 at 2019-05-11 12:44:09 -0600
+Processing by BooksController#show as HTML
+  Parameters: {"id"=>"35"}
+  [1m[36mBook Load (0.2ms)[0m  [1m[34mSELECT  "books".* FROM "books" WHERE "books"."id" = $1 LIMIT $2[0m  [["id", 35], ["LIMIT", 1]]
+  Rendering books/show.html.erb within layouts/application
+  [1m[36mAuthor Load (0.4ms)[0m  [1m[34mSELECT "authors".* FROM "authors" INNER JOIN "book_authors" ON "authors"."id" = "book_authors"."author_id" WHERE "book_authors"."book_id" = $1[0m  [["book_id", 35]]
+  [1m[36mReview Load (0.3ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."book_id" = $1[0m  [["book_id", 35]]
+  Rendered books/show.html.erb within layouts/application (14.5ms)
+Completed 200 OK in 137ms (Views: 126.1ms | ActiveRecord: 2.2ms)
+Started GET "/books/35/reviews/new" for 127.0.0.1 at 2019-05-11 12:44:09 -0600
+Processing by ReviewsController#new as HTML
+  Parameters: {"book_id"=>"35"}
+  [1m[36mBook Load (0.4ms)[0m  [1m[34mSELECT  "books".* FROM "books" WHERE "books"."id" = $1 LIMIT $2[0m  [["id", 35], ["LIMIT", 1]]
+  Rendering reviews/new.html.erb within layouts/application
+  Rendered reviews/new.html.erb within layouts/application (9.7ms)
+Completed 200 OK in 22ms (Views: 12.4ms | ActiveRecord: 2.2ms)
+Started POST "/books/35/reviews" for 127.0.0.1 at 2019-05-11 12:44:09 -0600
+Processing by ReviewsController#create as HTML
+  Parameters: {"utf8"=>"✓", "review"=>{"user"=>"Mills", "heading"=>"Review of Book", "full_review"=>"OMG, love this book!!!!!!!!!!!!!!!!!!!", "score"=>"35"}, "commit"=>"Add a Review", "book_id"=>"35"}
+  [1m[36mBook Load (1.0ms)[0m  [1m[34mSELECT  "books".* FROM "books" WHERE "books"."id" = $1 LIMIT $2[0m  [["id", 35], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "reviews" ("score", "heading", "full_review", "book_id", "created_at", "updated_at", "user") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["score", 35], ["heading", "Review of Book"], ["full_review", "OMG, love this book!!!!!!!!!!!!!!!!!!!"], ["book_id", 35], ["created_at", "2019-05-11 18:44:09.789404"], ["updated_at", "2019-05-11 18:44:09.789404"], ["user", "Mills"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/books/35
+Completed 302 Found in 11ms (ActiveRecord: 1.8ms)
+Started GET "/books/35" for 127.0.0.1 at 2019-05-11 12:44:09 -0600
+Processing by BooksController#show as HTML
+  Parameters: {"id"=>"35"}
+  [1m[36mBook Load (0.3ms)[0m  [1m[34mSELECT  "books".* FROM "books" WHERE "books"."id" = $1 LIMIT $2[0m  [["id", 35], ["LIMIT", 1]]
+  Rendering books/show.html.erb within layouts/application
+  [1m[36mAuthor Load (0.4ms)[0m  [1m[34mSELECT "authors".* FROM "authors" INNER JOIN "book_authors" ON "authors"."id" = "book_authors"."author_id" WHERE "book_authors"."book_id" = $1[0m  [["book_id", 35]]
+  [1m[36mReview Load (0.4ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."book_id" = $1[0m  [["book_id", 35]]
+  Rendered books/show.html.erb within layouts/application (4.4ms)
+Completed 200 OK in 8ms (Views: 5.7ms | ActiveRecord: 1.0ms)
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "reviews"[0m
+  [1m[36mReview Load (0.2ms)[0m  [1m[34mSELECT  "reviews".* FROM "reviews" ORDER BY "reviews"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (6.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mBook Exists (0.5ms)[0m  [1m[34mSELECT  1 AS one FROM "books" WHERE "books"."title" = $1 LIMIT $2[0m  [["title", "The Hobbit"], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "books" ("title", "pages", "pub_year", "thumb_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "The Hobbit"], ["pages", 310], ["pub_year", 1937], ["thumb_url", "this_is_a_test_url"], ["created_at", "2019-05-11 18:49:14.513689"], ["updated_at", "2019-05-11 18:49:14.513689"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (2.4ms)[0m  [1m[32mINSERT INTO "authors" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "J.R.R. Tolkien"], ["created_at", "2019-05-11 18:49:14.542170"], ["updated_at", "2019-05-11 18:49:14.542170"]]
+  [1m[35mSQL (1.4ms)[0m  [1m[32mINSERT INTO "book_authors" ("book_id", "author_id") VALUES ($1, $2) RETURNING "id"[0m  [["book_id", 36], ["author_id", 36]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/books/36" for 127.0.0.1 at 2019-05-11 12:49:14 -0600
+Processing by BooksController#show as HTML
+  Parameters: {"id"=>"36"}
+  [1m[36mBook Load (0.2ms)[0m  [1m[34mSELECT  "books".* FROM "books" WHERE "books"."id" = $1 LIMIT $2[0m  [["id", 36], ["LIMIT", 1]]
+  Rendering books/show.html.erb within layouts/application
+  [1m[36mAuthor Load (0.4ms)[0m  [1m[34mSELECT "authors".* FROM "authors" INNER JOIN "book_authors" ON "authors"."id" = "book_authors"."author_id" WHERE "book_authors"."book_id" = $1[0m  [["book_id", 36]]
+  [1m[36mReview Load (0.3ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."book_id" = $1[0m  [["book_id", 36]]
+  Rendered books/show.html.erb within layouts/application (9.1ms)
+Completed 200 OK in 142ms (Views: 133.7ms | ActiveRecord: 1.9ms)
+Started GET "/books/36/reviews/new" for 127.0.0.1 at 2019-05-11 12:49:14 -0600
+Processing by ReviewsController#new as HTML
+  Parameters: {"book_id"=>"36"}
+  [1m[36mBook Load (0.4ms)[0m  [1m[34mSELECT  "books".* FROM "books" WHERE "books"."id" = $1 LIMIT $2[0m  [["id", 36], ["LIMIT", 1]]
+  Rendering reviews/new.html.erb within layouts/application
+  Rendered reviews/new.html.erb within layouts/application (9.9ms)
+Completed 200 OK in 38ms (Views: 29.1ms | ActiveRecord: 2.2ms)
+Started POST "/books/36/reviews" for 127.0.0.1 at 2019-05-11 12:49:14 -0600
+Processing by ReviewsController#create as HTML
+  Parameters: {"utf8"=>"✓", "review"=>{"user"=>"Mills", "heading"=>"Review of Book", "full_review"=>"OMG, love this book!!!!!!!!!!!!!!!!!!!", "score"=>"35"}, "commit"=>"Add a Review", "book_id"=>"36"}
+  [1m[36mBook Load (0.3ms)[0m  [1m[34mSELECT  "books".* FROM "books" WHERE "books"."id" = $1 LIMIT $2[0m  [["id", 36], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "reviews" ("score", "heading", "full_review", "book_id", "created_at", "updated_at", "user") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["score", 35], ["heading", "Review of Book"], ["full_review", "OMG, love this book!!!!!!!!!!!!!!!!!!!"], ["book_id", 36], ["created_at", "2019-05-11 18:49:14.782825"], ["updated_at", "2019-05-11 18:49:14.782825"], ["user", "Mills"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/books/36
+Completed 302 Found in 6ms (ActiveRecord: 0.9ms)
+Started GET "/books/36" for 127.0.0.1 at 2019-05-11 12:49:14 -0600
+Processing by BooksController#show as HTML
+  Parameters: {"id"=>"36"}
+  [1m[36mBook Load (0.2ms)[0m  [1m[34mSELECT  "books".* FROM "books" WHERE "books"."id" = $1 LIMIT $2[0m  [["id", 36], ["LIMIT", 1]]
+  Rendering books/show.html.erb within layouts/application
+  [1m[36mAuthor Load (0.3ms)[0m  [1m[34mSELECT "authors".* FROM "authors" INNER JOIN "book_authors" ON "authors"."id" = "book_authors"."author_id" WHERE "book_authors"."book_id" = $1[0m  [["book_id", 36]]
+  [1m[36mReview Load (0.3ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."book_id" = $1[0m  [["book_id", 36]]
+  Rendered books/show.html.erb within layouts/application (3.9ms)
+Completed 200 OK in 7ms (Views: 4.9ms | ActiveRecord: 0.9ms)
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "reviews"[0m
+  [1m[36mReview Load (0.2ms)[0m  [1m[34mSELECT  "reviews".* FROM "reviews" ORDER BY "reviews"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mBook Exists (0.5ms)[0m  [1m[34mSELECT  1 AS one FROM "books" WHERE "books"."title" = $1 LIMIT $2[0m  [["title", "The Hobbit"], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "books" ("title", "pages", "pub_year", "thumb_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "The Hobbit"], ["pages", 310], ["pub_year", 1937], ["thumb_url", "this_is_a_test_url"], ["created_at", "2019-05-11 18:53:53.159913"], ["updated_at", "2019-05-11 18:53:53.159913"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "authors" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "J.R.R. Tolkien"], ["created_at", "2019-05-11 18:53:53.187661"], ["updated_at", "2019-05-11 18:53:53.187661"]]
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "book_authors" ("book_id", "author_id") VALUES ($1, $2) RETURNING "id"[0m  [["book_id", 37], ["author_id", 37]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/books/37" for 127.0.0.1 at 2019-05-11 12:53:53 -0600
+Processing by BooksController#show as HTML
+  Parameters: {"id"=>"37"}
+  [1m[36mBook Load (0.2ms)[0m  [1m[34mSELECT  "books".* FROM "books" WHERE "books"."id" = $1 LIMIT $2[0m  [["id", 37], ["LIMIT", 1]]
+  Rendering books/show.html.erb within layouts/application
+  [1m[36mAuthor Load (0.4ms)[0m  [1m[34mSELECT "authors".* FROM "authors" INNER JOIN "book_authors" ON "authors"."id" = "book_authors"."author_id" WHERE "book_authors"."book_id" = $1[0m  [["book_id", 37]]
+  [1m[36mReview Load (0.3ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."book_id" = $1[0m  [["book_id", 37]]
+  Rendered books/show.html.erb within layouts/application (9.4ms)
+Completed 200 OK in 154ms (Views: 145.9ms | ActiveRecord: 1.8ms)
+Started GET "/books/37/reviews/new" for 127.0.0.1 at 2019-05-11 12:53:53 -0600
+Processing by ReviewsController#new as HTML
+  Parameters: {"book_id"=>"37"}
+  [1m[36mBook Load (0.3ms)[0m  [1m[34mSELECT  "books".* FROM "books" WHERE "books"."id" = $1 LIMIT $2[0m  [["id", 37], ["LIMIT", 1]]
+  Rendering reviews/new.html.erb within layouts/application
+  Rendered reviews/new.html.erb within layouts/application (9.5ms)
+Completed 200 OK in 21ms (Views: 12.2ms | ActiveRecord: 2.1ms)
+Started POST "/books/37/reviews" for 127.0.0.1 at 2019-05-11 12:53:53 -0600
+Processing by ReviewsController#create as HTML
+  Parameters: {"utf8"=>"✓", "review"=>{"user"=>"mills", "heading"=>"Review of Book", "full_review"=>"OMG, love this book!!!!!!!!!!!!!!!!!!!", "score"=>"5"}, "commit"=>"Add a Review", "book_id"=>"37"}
+  [1m[36mBook Load (0.3ms)[0m  [1m[34mSELECT  "books".* FROM "books" WHERE "books"."id" = $1 LIMIT $2[0m  [["id", 37], ["LIMIT", 1]]
+Completed 500 Internal Server Error in 245643ms (ActiveRecord: 0.3ms)
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mBook Exists (0.5ms)[0m  [1m[34mSELECT  1 AS one FROM "books" WHERE "books"."title" = $1 LIMIT $2[0m  [["title", "The Hobbit"], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "books" ("title", "pages", "pub_year", "thumb_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "The Hobbit"], ["pages", 310], ["pub_year", 1937], ["thumb_url", "this_is_a_test_url"], ["created_at", "2019-05-11 18:58:10.572214"], ["updated_at", "2019-05-11 18:58:10.572214"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.5ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "authors" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "J.R.R. Tolkien"], ["created_at", "2019-05-11 18:58:10.606665"], ["updated_at", "2019-05-11 18:58:10.606665"]]
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "book_authors" ("book_id", "author_id") VALUES ($1, $2) RETURNING "id"[0m  [["book_id", 38], ["author_id", 38]]
+  [1m[35m (0.6ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/books/38" for 127.0.0.1 at 2019-05-11 12:58:10 -0600
+Processing by BooksController#show as HTML
+  Parameters: {"id"=>"38"}
+  [1m[36mBook Load (0.2ms)[0m  [1m[34mSELECT  "books".* FROM "books" WHERE "books"."id" = $1 LIMIT $2[0m  [["id", 38], ["LIMIT", 1]]
+  Rendering books/show.html.erb within layouts/application
+  [1m[36mAuthor Load (0.4ms)[0m  [1m[34mSELECT "authors".* FROM "authors" INNER JOIN "book_authors" ON "authors"."id" = "book_authors"."author_id" WHERE "book_authors"."book_id" = $1[0m  [["book_id", 38]]
+  [1m[36mReview Load (0.3ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."book_id" = $1[0m  [["book_id", 38]]
+  Rendered books/show.html.erb within layouts/application (17.5ms)
+Completed 200 OK in 122ms (Views: 111.3ms | ActiveRecord: 2.0ms)
+Started GET "/books/38/reviews/new" for 127.0.0.1 at 2019-05-11 12:58:10 -0600
+Processing by ReviewsController#new as HTML
+  Parameters: {"book_id"=>"38"}
+  [1m[36mBook Load (0.3ms)[0m  [1m[34mSELECT  "books".* FROM "books" WHERE "books"."id" = $1 LIMIT $2[0m  [["id", 38], ["LIMIT", 1]]
+  Rendering reviews/new.html.erb within layouts/application
+  Rendered reviews/new.html.erb within layouts/application (10.2ms)
+Completed 200 OK in 22ms (Views: 13.0ms | ActiveRecord: 1.6ms)
+Started POST "/books/38/reviews" for 127.0.0.1 at 2019-05-11 12:58:10 -0600
+Processing by ReviewsController#create as HTML
+  Parameters: {"utf8"=>"✓", "review"=>{"user"=>"mills", "heading"=>"Review of Book", "full_review"=>"OMG, love this book!!!!!!!!!!!!!!!!!!!", "score"=>"5"}, "commit"=>"Add a Review", "book_id"=>"38"}
+  [1m[36mBook Load (1.0ms)[0m  [1m[34mSELECT  "books".* FROM "books" WHERE "books"."id" = $1 LIMIT $2[0m  [["id", 38], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "reviews" ("score", "heading", "full_review", "book_id", "created_at", "updated_at", "user") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["score", 5], ["heading", "Review of Book"], ["full_review", "OMG, love this book!!!!!!!!!!!!!!!!!!!"], ["book_id", 38], ["created_at", "2019-05-11 18:58:10.814506"], ["updated_at", "2019-05-11 18:58:10.814506"], ["user", "Mills"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/books/38
+Completed 500 Internal Server Error in 13318ms (ActiveRecord: 2.0ms)
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mBook Exists (0.5ms)[0m  [1m[34mSELECT  1 AS one FROM "books" WHERE "books"."title" = $1 LIMIT $2[0m  [["title", "The Hobbit"], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "books" ("title", "pages", "pub_year", "thumb_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "The Hobbit"], ["pages", 310], ["pub_year", 1937], ["thumb_url", "this_is_a_test_url"], ["created_at", "2019-05-11 18:58:56.818217"], ["updated_at", "2019-05-11 18:58:56.818217"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "authors" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "J.R.R. Tolkien"], ["created_at", "2019-05-11 18:58:56.843667"], ["updated_at", "2019-05-11 18:58:56.843667"]]
+  [1m[35mSQL (0.8ms)[0m  [1m[32mINSERT INTO "book_authors" ("book_id", "author_id") VALUES ($1, $2) RETURNING "id"[0m  [["book_id", 39], ["author_id", 39]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/books/39" for 127.0.0.1 at 2019-05-11 12:58:56 -0600
+Processing by BooksController#show as HTML
+  Parameters: {"id"=>"39"}
+  [1m[36mBook Load (0.2ms)[0m  [1m[34mSELECT  "books".* FROM "books" WHERE "books"."id" = $1 LIMIT $2[0m  [["id", 39], ["LIMIT", 1]]
+  Rendering books/show.html.erb within layouts/application
+  [1m[36mAuthor Load (0.4ms)[0m  [1m[34mSELECT "authors".* FROM "authors" INNER JOIN "book_authors" ON "authors"."id" = "book_authors"."author_id" WHERE "book_authors"."book_id" = $1[0m  [["book_id", 39]]
+  [1m[36mReview Load (0.3ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."book_id" = $1[0m  [["book_id", 39]]
+  Rendered books/show.html.erb within layouts/application (14.3ms)
+Completed 200 OK in 136ms (Views: 124.5ms | ActiveRecord: 1.8ms)
+Started GET "/books/39/reviews/new" for 127.0.0.1 at 2019-05-11 12:58:57 -0600
+Processing by ReviewsController#new as HTML
+  Parameters: {"book_id"=>"39"}
+  [1m[36mBook Load (0.3ms)[0m  [1m[34mSELECT  "books".* FROM "books" WHERE "books"."id" = $1 LIMIT $2[0m  [["id", 39], ["LIMIT", 1]]
+  Rendering reviews/new.html.erb within layouts/application
+  Rendered reviews/new.html.erb within layouts/application (15.1ms)
+Completed 200 OK in 28ms (Views: 18.7ms | ActiveRecord: 1.8ms)
+Started POST "/books/39/reviews" for 127.0.0.1 at 2019-05-11 12:58:57 -0600
+Processing by ReviewsController#create as HTML
+  Parameters: {"utf8"=>"✓", "review"=>{"user"=>"mills", "heading"=>"Review of Book", "full_review"=>"OMG, love this book!!!!!!!!!!!!!!!!!!!", "score"=>"5"}, "commit"=>"Add a Review", "book_id"=>"39"}
+  [1m[36mBook Load (0.2ms)[0m  [1m[34mSELECT  "books".* FROM "books" WHERE "books"."id" = $1 LIMIT $2[0m  [["id", 39], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "reviews" ("score", "heading", "full_review", "book_id", "created_at", "updated_at", "user") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["score", 5], ["heading", "Review of Book"], ["full_review", "OMG, love this book!!!!!!!!!!!!!!!!!!!"], ["book_id", 39], ["created_at", "2019-05-11 18:58:57.064941"], ["updated_at", "2019-05-11 18:58:57.064941"], ["user", "Mills"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/books/39
+Completed 302 Found in 6ms (ActiveRecord: 0.8ms)
+Started GET "/books/39" for 127.0.0.1 at 2019-05-11 12:58:57 -0600
+Processing by BooksController#show as HTML
+  Parameters: {"id"=>"39"}
+  [1m[36mBook Load (0.3ms)[0m  [1m[34mSELECT  "books".* FROM "books" WHERE "books"."id" = $1 LIMIT $2[0m  [["id", 39], ["LIMIT", 1]]
+  Rendering books/show.html.erb within layouts/application
+  [1m[36mAuthor Load (0.3ms)[0m  [1m[34mSELECT "authors".* FROM "authors" INNER JOIN "book_authors" ON "authors"."id" = "book_authors"."author_id" WHERE "book_authors"."book_id" = $1[0m  [["book_id", 39]]
+  [1m[36mReview Load (0.2ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."book_id" = $1[0m  [["book_id", 39]]
+  Rendered books/show.html.erb within layouts/application (3.0ms)
+Completed 200 OK in 6ms (Views: 4.3ms | ActiveRecord: 0.8ms)
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "reviews"[0m
+  [1m[36mReview Load (0.2ms)[0m  [1m[34mSELECT  "reviews".* FROM "reviews" ORDER BY "reviews"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m

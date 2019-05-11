@@ -18,18 +18,18 @@ RSpec.describe 'As a visitor on a book show page' do
       fill_in 'review[heading]', with: "Review of Book"
       fill_in 'review[full_review]', with: "OMG, love this book!!!!!!!!!!!!!!!!!!!"
       fill_in 'review[score]', with: 5
-      fill_in 'review[user]', with: "Mills"
+      fill_in 'review[user]', with: "mills"
+      save_and_open_page
 
       click_button 'Add a Review'
 
       expect(current_path).to eq(book_path(@book_1))
       expect(Review.all.count).to eq(1)
       review = Review.last
-      save_and_open_page
       expect(page).to have_content(review.heading)
       expect(page).to have_content(review.full_review)
       expect(page).to have_content(review.score)
-      expect(page).to have_content(review.user)
+      expect(page).to have_content("Mills")
 
     end
   end
