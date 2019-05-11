@@ -14,8 +14,9 @@
 
 <% @reviews.each do |review|%>
 <ul id="review-<%= review.id %>">
+  <h3><%= link_to review.user, reviews_path(name: review.user) %></h3>
+  <li><%= review.user %></li>
 <li><%= review.heading %></li>
-<li><%= review.user %></li>
 <li><%= review.score %></li>
 <li><%= review.full_review %></li>
 </ul>

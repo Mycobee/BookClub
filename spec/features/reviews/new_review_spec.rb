@@ -53,7 +53,6 @@ RSpec.describe 'As a visitor on a book show page' do
       fill_in 'review[user]', with: "mills"
 
       click_button 'Add a Review'
-      binding.pry
 
       expect(Review.all.count).to eq(1)
     end
