@@ -11,7 +11,24 @@ RSpec.describe 'As a visitor on a book show page' do
     end
 
     it 'It takes me to a new review path where I can input review data' do
+      click_link 'Add a Review'
 
+      expect(current_path).to eq(new_review_path)
+
+      fill_in 'review[heading]', with: "Review of Book"
+      fill_in 'review[full_review]', with: "OMG, love this book!!!!!!!!!!!!!!!!!!!"
+      fill_in 'review[score]', with: 5
+      fill_in 'review[user]', with: "Mills"
+
+      click_button 'Add a Review'
+
+      expect(current_path).to eq(book_path(@book_1))
+      expect(Review.all.count).to eq(1)
+      review = Review.last
+      expect(current_path).to have_content(review.heading)
+      expect(current_path).to have_content(review.full_review)
+      expect(current_path).to have_content(review.score)
+      expect(current_path).to have_content(review.user)
 
     end
   end
