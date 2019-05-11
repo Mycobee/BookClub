@@ -6,8 +6,9 @@ class ReviewsController < ApplicationController
 
   def create
     @book = Book.find(params[:book_id])
-    @review = @book.reviews.create(user: review_params[:user].titleize, heading: review_params[:heading], full_review: review_params[:full_review], score: review_params[:score])
-    
+    if Review.where(user: review_params[:user].titleize) == []
+      @review = @book.reviews.create(review_params)
+    end
     redirect_to book_path(@book)
   end
 

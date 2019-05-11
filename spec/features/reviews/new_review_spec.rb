@@ -19,7 +19,6 @@ RSpec.describe 'As a visitor on a book show page' do
       fill_in 'review[full_review]', with: "OMG, love this book!!!!!!!!!!!!!!!!!!!"
       fill_in 'review[score]', with: 5
       fill_in 'review[user]', with: "mills"
-      save_and_open_page
 
       click_button 'Add a Review'
 
@@ -30,7 +29,34 @@ RSpec.describe 'As a visitor on a book show page' do
       expect(page).to have_content(review.full_review)
       expect(page).to have_content(review.score)
       expect(page).to have_content("Mills")
-
     end
+
+    it 'will not allow duplicate reviews from a user' do
+      visit new_book_review_path(@book_1)
+      # @review_1 = @book_1.reviews.create(user: "mills", heading: "Awesome!", full_review: "Yay", score: 5)
+      #
+      # @review_2 = @book_1.reviews.create(user: "Mills", heading: "Awesome!", full_review: "Yay", score: 5)
+
+
+      fill_in 'review[heading]', with: "Review of Book"
+      fill_in 'review[full_review]', with: "OMG, love this book!!!!!!!!!!!!!!!!!!!"
+      fill_in 'review[score]', with: 5
+      fill_in 'review[user]', with: "Mills"
+
+      click_button 'Add a Review'
+
+      visit new_book_review_path(@book_1)
+
+      fill_in 'review[heading]', with: "Review of Book"
+      fill_in 'review[full_review]', with: "OMG, love this book!!!!!!!!!!!!!!!!!!!"
+      fill_in 'review[score]', with: 5
+      fill_in 'review[user]', with: "mills"
+
+      click_button 'Add a Review'
+      binding.pry
+
+      expect(Review.all.count).to eq(1)
+    end
+
   end
 end
