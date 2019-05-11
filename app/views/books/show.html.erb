@@ -9,7 +9,7 @@
  <li><%= author.name %></li>
 </ul>
  <% end %>
-
+<%= link_to "Add a Review", new_book_review_path(@book) %>
 <h3>Reviews:</h3>
 
 <% @reviews.each do |review|%>
