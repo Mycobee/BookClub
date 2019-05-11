@@ -1,0 +1,23 @@
+<h1><%= @book.title %></h1>
+<ul>
+  <img src=<%= @book.thumb_url %> alt="book pic" width=200>
+  <li><%= @book.pub_year %></li>
+  <li><%= @book.pages %></li>
+</ul>
+<% @authors.each do |author| %>
+<ul>
+ <li><%= author.name %></li>
+</ul>
+ <% end %>
+<%= link_to "Add a Review", new_book_review_path(@book) %>
+<h3>Reviews:</h3>
+
+<% @reviews.each do |review|%>
+<ul id="review-<%= review.id %>">
+<li><%= review.heading %></li>
+<li><%= review.user %></li>
+<li><%= review.score %></li>
+<li><%= review.full_review %></li>
+</ul>
+<% end %>
+<%= link_to "Delete Book", book_path(@book), method: :delete %>
