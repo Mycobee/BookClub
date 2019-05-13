@@ -18,6 +18,14 @@ class Book < ApplicationRecord
     self.reviews.average(:score)
   end
 
+  def top_reviews
+
+  end
+
+  # def lowest_reviews
+  #
+  # end
+
   def self.ascending_pages
       Book.order(:pages)
   end
@@ -34,5 +42,9 @@ class Book < ApplicationRecord
   def self.descending_review_count
     book_ids = Review.joins(:book).select('book_id, count(*)').group(:book_id).order(count: :desc).pluck(:book_id)
     Book.find(book_ids)
+  end
+
+  def self.highest_rated
+    Book.select('books.id, avg(reviews.score)').joins(:reviews).group(:id).order('avg desc').limit(3)
   end
 end

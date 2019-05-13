@@ -83,5 +83,42 @@ RSpec.describe Book, type: :model do
 
         expect(Book.descending_review_count).to eq([book_1, book_2])
     end
+
+    it '.highest_rated' do
+      book_1 = Book.create!(title: "The Hobbit", pub_year: 1937, pages: 500, thumb_url: "this_is_a_test_url")
+      book_2 = Book.create!(title: "Not The Hobbit", pub_year: 1937, pages: 310, thumb_url: "this_is_a_test_url")
+      book_3 = Book.create!(title: "Never The Hobbit", pub_year: 1937, pages: 110, thumb_url: "this_is_a_test_url")
+      book_4 = Book.create!(title: "Sometimes The Hobbit", pub_year: 1937, pages: 110, thumb_url: "this_is_a_test_url")
+
+      review_1 = book_1.reviews.create!(user: "Mills", heading: "Couldn't dig it.", full_review: "Not my jam, too hard to read. Not enough pictures", score: 2)
+
+      review_2 = book_2.reviews.create!(user: "Rob", heading: "BEST BOOK EVER", full_review: "OMG, it was like, THE BEST BOOK. FOREVER. LITERALLY. EVER. LITERALLY.", score: 3)
+
+      review_3 = book_3.reviews.create!(user: "Joe", heading: "Worst", full_review: "sadkjfnwieuf.", score: 4)
+
+      review_4 = book_4.reviews.create!(user: "Pam", heading: "Fantastic.", full_review: "AKsjdsi", score: 5)
+
+      expect(Book.highest_rated).to eq([book_4, book_3, book_2])
+    end
+
+    it '.lowest_rated' do
+      book_1 = Book.create!(title: "The Hobbit", pub_year: 1937, pages: 500, thumb_url: "this_is_a_test_url")
+      book_2 = Book.create!(title: "Not The Hobbit", pub_year: 1937, pages: 310, thumb_url: "this_is_a_test_url")
+      book_3 = Book.create!(title: "Never The Hobbit", pub_year: 1937, pages: 110, thumb_url: "this_is_a_test_url")
+      book_4 = Book.create!(title: "Sometimes The Hobbit", pub_year: 1937, pages: 110, thumb_url: "this_is_a_test_url")
+
+      review_1 = book_1.reviews.create!(user: "Mills", heading: "Couldn't dig it.", full_review: "Not my jam, too hard to read. Not enough pictures", score: 2)
+
+      review_2 = book_2.reviews.create!(user: "Rob", heading: "BEST BOOK EVER", full_review: "OMG, it was like, THE BEST BOOK. FOREVER. LITERALLY. EVER. LITERALLY.", score: 3)
+
+      review_3 = book_3.reviews.create!(user: "Joe", heading: "Worst", full_review: "sadkjfnwieuf.", score: 4)
+
+      review_4 = book_4.reviews.create!(user: "Pam", heading: "Fantastic.", full_review: "AKsjdsi", score: 5)
+
+      expect(Book.lowest_rated).to eq([book_1, book_2, book_3])
+    end
+
+    
+
   end
 end

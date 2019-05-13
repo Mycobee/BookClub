@@ -944,3 +944,102 @@ app/controllers/books_controller.rb:12:in `show'
   [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
   [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "reviews" ("score", "heading", "full_review", "book_id", "created_at", "updated_at", "user") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["score", 3], ["heading", "Eh"], ["full_review", "Great book"], ["book_id", 6], ["created_at", "2019-05-13 20:59:42.850527"], ["updated_at", "2019-05-13 20:59:42.850527"], ["user", "Joe"]]
   [1m[35m (5.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mBook Load (0.5ms)[0m  [1m[34mSELECT "books".* FROM "books"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mReview Load (0.9ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."book_id" = $1[0m  [["book_id", 5]]
+  [1m[35mSQL (0.4ms)[0m  [1m[31mDELETE FROM "reviews" WHERE "reviews"."id" = $1[0m  [["id", 2]]
+  [1m[35mSQL (0.2ms)[0m  [1m[31mDELETE FROM "reviews" WHERE "reviews"."id" = $1[0m  [["id", 3]]
+  [1m[36mBookAuthor Load (0.3ms)[0m  [1m[34mSELECT "book_authors".* FROM "book_authors" WHERE "book_authors"."book_id" = $1[0m  [["book_id", 5]]
+  [1m[35mSQL (0.4ms)[0m  [1m[31mDELETE FROM "books" WHERE "books"."id" = $1[0m  [["id", 5]]
+  [1m[35m (40.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mReview Load (0.3ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."book_id" = $1[0m  [["book_id", 6]]
+  [1m[35mSQL (0.2ms)[0m  [1m[31mDELETE FROM "reviews" WHERE "reviews"."id" = $1[0m  [["id", 4]]
+  [1m[36mBookAuthor Load (0.2ms)[0m  [1m[34mSELECT "book_authors".* FROM "book_authors" WHERE "book_authors"."book_id" = $1[0m  [["book_id", 6]]
+  [1m[35mSQL (0.3ms)[0m  [1m[31mDELETE FROM "books" WHERE "books"."id" = $1[0m  [["id", 6]]
+  [1m[35m (2.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mReview Load (0.6ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews"[0m
+  [1m[36mAuthor Load (0.5ms)[0m  [1m[34mSELECT "authors".* FROM "authors"[0m
+  [1m[36mBookAuthor Load (0.4ms)[0m  [1m[34mSELECT "book_authors".* FROM "book_authors"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mBook Exists (0.5ms)[0m  [1m[34mSELECT  1 AS one FROM "books" WHERE "books"."title" = $1 LIMIT $2[0m  [["title", "The Hobbit"], ["LIMIT", 1]]
+  [1m[35mSQL (6.7ms)[0m  [1m[32mINSERT INTO "books" ("title", "pages", "pub_year", "thumb_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "The Hobbit"], ["pages", 500], ["pub_year", 1937], ["thumb_url", "this_is_a_test_url"], ["created_at", "2019-05-13 22:08:41.703775"], ["updated_at", "2019-05-13 22:08:41.703775"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mBook Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "books" WHERE "books"."title" = $1 LIMIT $2[0m  [["title", "Not The Hobbit"], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "books" ("title", "pages", "pub_year", "thumb_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Not The Hobbit"], ["pages", 310], ["pub_year", 1937], ["thumb_url", "this_is_a_test_url"], ["created_at", "2019-05-13 22:08:45.160623"], ["updated_at", "2019-05-13 22:08:45.160623"]]
+  [1m[35m (2.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mBook Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "books" WHERE "books"."title" = $1 LIMIT $2[0m  [["title", "Never The Hobbit"], ["LIMIT", 1]]
+  [1m[35mSQL (0.9ms)[0m  [1m[32mINSERT INTO "books" ("title", "pages", "pub_year", "thumb_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Never The Hobbit"], ["pages", 110], ["pub_year", 1937], ["thumb_url", "this_is_a_test_url"], ["created_at", "2019-05-13 22:08:49.861389"], ["updated_at", "2019-05-13 22:08:49.861389"]]
+  [1m[35m (2.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mBook Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "books" WHERE "books"."title" = $1 LIMIT $2[0m  [["title", "Sometimes The Hobbit"], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "books" ("title", "pages", "pub_year", "thumb_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Sometimes The Hobbit"], ["pages", 110], ["pub_year", 1937], ["thumb_url", "this_is_a_test_url"], ["created_at", "2019-05-13 22:08:53.202095"], ["updated_at", "2019-05-13 22:08:53.202095"]]
+  [1m[35m (5.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "reviews" ("score", "heading", "full_review", "book_id", "created_at", "updated_at", "user") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["score", 2], ["heading", "Couldn't dig it."], ["full_review", "Not my jam, too hard to read. Not enough pictures"], ["book_id", 7], ["created_at", "2019-05-13 22:08:58.905069"], ["updated_at", "2019-05-13 22:08:58.905069"], ["user", "Mills"]]
+  [1m[35m (5.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "reviews" ("score", "heading", "full_review", "book_id", "created_at", "updated_at", "user") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["score", 3], ["heading", "BEST BOOK EVER"], ["full_review", "OMG, it was like, THE BEST BOOK. FOREVER. LITERALLY. EVER. LITERALLY."], ["book_id", 8], ["created_at", "2019-05-13 22:09:03.405436"], ["updated_at", "2019-05-13 22:09:03.405436"], ["user", "Rob"]]
+  [1m[35m (5.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "reviews" ("score", "heading", "full_review", "book_id", "created_at", "updated_at", "user") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["score", 4], ["heading", "Worst"], ["full_review", "sadkjfnwieuf."], ["book_id", 9], ["created_at", "2019-05-13 22:09:07.136370"], ["updated_at", "2019-05-13 22:09:07.136370"], ["user", "Joe"]]
+  [1m[35m (2.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "reviews" ("score", "heading", "full_review", "book_id", "created_at", "updated_at", "user") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["score", 5], ["heading", "Fantastic."], ["full_review", "AKsjdsi"], ["book_id", 10], ["created_at", "2019-05-13 22:09:10.374641"], ["updated_at", "2019-05-13 22:09:10.374641"], ["user", "Pam"]]
+  [1m[35m (5.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mBook Load (0.3ms)[0m  [1m[34mSELECT  "books".* FROM "books" LIMIT $1[0m  [["LIMIT", 11]]
+  [1m[36mBook Load (0.4ms)[0m  [1m[34mSELECT "books".* FROM "books"[0m
+  [1m[35mSQL (2.6ms)[0m  [1m[31mDELETE FROM "reviews"[0m
+  [1m[35mSQL (6.8ms)[0m  [1m[31mDELETE FROM "books"[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[31mDELETE FROM "authors"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mBook Exists (0.5ms)[0m  [1m[34mSELECT  1 AS one FROM "books" WHERE "books"."title" = $1 LIMIT $2[0m  [["title", "The Hobbit"], ["LIMIT", 1]]
+  [1m[35mSQL (6.4ms)[0m  [1m[32mINSERT INTO "books" ("title", "pages", "pub_year", "thumb_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "The Hobbit"], ["pages", 310], ["pub_year", 1937], ["thumb_url", "this_is_a_test_url"], ["created_at", "2019-05-13 23:20:25.517293"], ["updated_at", "2019-05-13 23:20:25.517293"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mBook Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "books" WHERE "books"."title" = $1 LIMIT $2[0m  [["title", "Not The Hobbit"], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "books" ("title", "pages", "pub_year", "thumb_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Not The Hobbit"], ["pages", 310], ["pub_year", 1937], ["thumb_url", "this_is_a_test_url"], ["created_at", "2019-05-13 23:20:29.701846"], ["updated_at", "2019-05-13 23:20:29.701846"]]
+  [1m[35m (5.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mBook Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "books" WHERE "books"."title" = $1 LIMIT $2[0m  [["title", "Sometimes The Hobbit"], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "books" ("title", "pages", "pub_year", "thumb_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Sometimes The Hobbit"], ["pages", 310], ["pub_year", 1937], ["thumb_url", "this_is_a_test_url"], ["created_at", "2019-05-13 23:20:33.368780"], ["updated_at", "2019-05-13 23:20:33.368780"]]
+  [1m[35m (2.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mBook Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "books" WHERE "books"."title" = $1 LIMIT $2[0m  [["title", "Almost The Hobbit"], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "books" ("title", "pages", "pub_year", "thumb_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Almost The Hobbit"], ["pages", 310], ["pub_year", 1937], ["thumb_url", "this_is_a_test_url"], ["created_at", "2019-05-13 23:20:37.361446"], ["updated_at", "2019-05-13 23:20:37.361446"]]
+  [1m[35m (5.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "reviews" ("score", "heading", "full_review", "book_id", "created_at", "updated_at", "user") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["score", 5], ["heading", "Awesome!"], ["full_review", "Yay"], ["book_id", 11], ["created_at", "2019-05-13 23:20:41.889855"], ["updated_at", "2019-05-13 23:20:41.889855"], ["user", "Mills"]]
+  [1m[35m (5.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "reviews" ("score", "heading", "full_review", "book_id", "created_at", "updated_at", "user") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["score", 5], ["heading", "Awesome!"], ["full_review", "Yay"], ["book_id", 12], ["created_at", "2019-05-13 23:20:45.463897"], ["updated_at", "2019-05-13 23:20:45.463897"], ["user", "Mills"]]
+  [1m[35m (5.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "reviews" ("score", "heading", "full_review", "book_id", "created_at", "updated_at", "user") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["score", 5], ["heading", "Awesome!"], ["full_review", "Yay"], ["book_id", 12], ["created_at", "2019-05-13 23:20:50.851497"], ["updated_at", "2019-05-13 23:20:50.851497"], ["user", "Mills"]]
+  [1m[35m (5.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "reviews" ("score", "heading", "full_review", "book_id", "created_at", "updated_at", "user") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["score", 5], ["heading", "Awesome!"], ["full_review", "Yay"], ["book_id", 13], ["created_at", "2019-05-13 23:20:56.913003"], ["updated_at", "2019-05-13 23:20:56.913003"], ["user", "Mills"]]
+  [1m[35m (5.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "reviews" ("score", "heading", "full_review", "book_id", "created_at", "updated_at", "user") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["score", 5], ["heading", "Awesome!"], ["full_review", "Yay"], ["book_id", 14], ["created_at", "2019-05-13 23:21:00.784440"], ["updated_at", "2019-05-13 23:21:00.784440"], ["user", "Mills"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "reviews" ("score", "heading", "full_review", "book_id", "created_at", "updated_at", "user") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["score", 5], ["heading", "Awesome!"], ["full_review", "Yay"], ["book_id", 11], ["created_at", "2019-05-13 23:21:05.348606"], ["updated_at", "2019-05-13 23:21:05.348606"], ["user", "Rob"]]
+  [1m[35m (5.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "reviews" ("score", "heading", "full_review", "book_id", "created_at", "updated_at", "user") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["score", 5], ["heading", "Awesome!"], ["full_review", "Yay"], ["book_id", 12], ["created_at", "2019-05-13 23:21:08.999082"], ["updated_at", "2019-05-13 23:21:08.999082"], ["user", "Rob"]]
+  [1m[35m (5.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "reviews" ("score", "heading", "full_review", "book_id", "created_at", "updated_at", "user") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["score", 5], ["heading", "Awesome!"], ["full_review", "Yay"], ["book_id", 13], ["created_at", "2019-05-13 23:21:12.478926"], ["updated_at", "2019-05-13 23:21:12.478926"], ["user", "Rob"]]
+  [1m[35m (5.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "reviews" ("score", "heading", "full_review", "book_id", "created_at", "updated_at", "user") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["score", 5], ["heading", "Awesome!"], ["full_review", "Yay"], ["book_id", 11], ["created_at", "2019-05-13 23:21:17.424249"], ["updated_at", "2019-05-13 23:21:17.424249"], ["user", "Stella"]]
+  [1m[35m (6.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "reviews" ("score", "heading", "full_review", "book_id", "created_at", "updated_at", "user") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["score", 5], ["heading", "Awesome!"], ["full_review", "Yay"], ["book_id", 12], ["created_at", "2019-05-13 23:21:21.021592"], ["updated_at", "2019-05-13 23:21:21.021592"], ["user", "Stella"]]
+  [1m[35m (2.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "reviews" ("score", "heading", "full_review", "book_id", "created_at", "updated_at", "user") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["score", 5], ["heading", "Awesome!"], ["full_review", "Yay"], ["book_id", 11], ["created_at", "2019-05-13 23:21:24.831794"], ["updated_at", "2019-05-13 23:21:24.831794"], ["user", "Vince"]]
+  [1m[35m (5.4ms)[0m  [1m[35mCOMMIT[0m
