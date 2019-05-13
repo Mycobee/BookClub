@@ -6,6 +6,7 @@
   <%= review.score %>
   <%= review.book.title %>
 <img src="<%= review.book.thumb_url %>" alt="reviewbook-<%= review.book.id %>">
+<%= link_to "Delete Review", review, method: :delete %>
   <%= review.created_at %>
 
 </section>

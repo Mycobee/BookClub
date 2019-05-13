@@ -30,4 +30,12 @@ RSpec.describe 'book index page', type: :feature do
       expect(page).to have_content(@author_3.name)
     end
   end
+
+  it 'click on any book title and am re-routed to that books show page' do
+    visit books_path
+
+    click_link "#{@book_1.title}"
+    
+    expect(current_path).to eq(book_path(@book_1))
+  end
 end

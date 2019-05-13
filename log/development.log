@@ -536,3 +536,343 @@ Completed 404 Not Found in 14ms (ActiveRecord: 0.5ms)
 ActiveRecord::RecordNotFound (Couldn't find Book with 'id'=hladsafjnsdo):
   
 app/controllers/books_controller.rb:12:in `show'
+Started GET "/" for ::1 at 2019-05-11 16:51:57 -0600
+  [1m[35m (6.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (0.8ms)
+Completed 200 OK in 130ms (Views: 127.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/books" for ::1 at 2019-05-11 16:52:02 -0600
+Processing by BooksController#index as HTML
+  Rendering books/index.html.erb within layouts/application
+  [1m[36mBook Load (0.5ms)[0m  [1m[34mSELECT "books".* FROM "books"[0m
+  [1m[36mAuthor Load (0.5ms)[0m  [1m[34mSELECT "authors".* FROM "authors" INNER JOIN "book_authors" ON "authors"."id" = "book_authors"."author_id" WHERE "book_authors"."book_id" = $1[0m  [["book_id", 1]]
+  Rendered books/index.html.erb within layouts/application (72.1ms)
+Completed 200 OK in 94ms (Views: 71.0ms | ActiveRecord: 15.2ms)
+
+
+Started GET "/" for ::1 at 2019-05-11 16:52:23 -0600
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (0.3ms)
+Completed 200 OK in 30ms (Views: 26.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/books" for ::1 at 2019-05-11 16:52:37 -0600
+Processing by BooksController#index as HTML
+  Rendering books/index.html.erb within layouts/application
+  [1m[36mBook Load (0.2ms)[0m  [1m[34mSELECT "books".* FROM "books"[0m
+  [1m[36mAuthor Load (0.3ms)[0m  [1m[34mSELECT "authors".* FROM "authors" INNER JOIN "book_authors" ON "authors"."id" = "book_authors"."author_id" WHERE "book_authors"."book_id" = $1[0m  [["book_id", 1]]
+  Rendered books/index.html.erb within layouts/application (3.6ms)
+Completed 200 OK in 27ms (Views: 23.8ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/books/new" for ::1 at 2019-05-11 16:52:39 -0600
+Processing by BooksController#new as HTML
+  Rendering books/new.html.erb within layouts/application
+  Rendered books/new.html.erb within layouts/application (28.7ms)
+Completed 200 OK in 51ms (Views: 48.4ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/books" for ::1 at 2019-05-11 16:52:52 -0600
+Processing by BooksController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"oxGW2rOxoSpAnY3fnOCr3g2iAMir2O5Z7N/HdQf4Dr1AIKqQMZguhiGBleX/tBb9+vatXBARNaj8UNFXKGTBOg==", "book"=>{"title"=>"Title", "pages"=>"123", "pub_year"=>"1984", "thumb_url"=>"thoihdsg", "authors"=>"#<Author::ActiveRecord_Associations_CollectionProxy:0x007fb9f52ecac8>"}, "commit"=>"Add a Book"}
+  [1m[36mBook Load (0.5ms)[0m  [1m[34mSELECT  "books".* FROM "books" WHERE "books"."title" = $1 LIMIT $2[0m  [["title", "Title"], ["LIMIT", 1]]
+  [1m[36mAuthor Load (0.3ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."name" = $1 LIMIT $2[0m  [["name", "#<Author::ActiveRecord_Associations_CollectionProxy:0x007fb9f52ecac8>"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.9ms)[0m  [1m[32mINSERT INTO "authors" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "#<Author::ActiveRecord_Associations_CollectionProxy:0x007fb9f52ecac8>"], ["created_at", "2019-05-11 22:52:52.209222"], ["updated_at", "2019-05-11 22:52:52.209222"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "book_authors" ("book_id", "author_id") VALUES ($1, $2) RETURNING "id"[0m  [["book_id", 1], ["author_id", 2]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mBook Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "books" WHERE "books"."title" = $1 AND ("books"."id" != $2) LIMIT $3[0m  [["title", "Title"], ["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/books
+Completed 302 Found in 33ms (ActiveRecord: 7.2ms)
+
+
+Started GET "/books" for ::1 at 2019-05-11 16:52:52 -0600
+Processing by BooksController#index as HTML
+  Rendering books/index.html.erb within layouts/application
+  [1m[36mBook Load (0.2ms)[0m  [1m[34mSELECT "books".* FROM "books"[0m
+  [1m[36mAuthor Load (0.3ms)[0m  [1m[34mSELECT "authors".* FROM "authors" INNER JOIN "book_authors" ON "authors"."id" = "book_authors"."author_id" WHERE "book_authors"."book_id" = $1[0m  [["book_id", 1]]
+  Rendered books/index.html.erb within layouts/application (2.9ms)
+Completed 200 OK in 17ms (Views: 14.3ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/books/new" for ::1 at 2019-05-11 16:53:04 -0600
+Processing by BooksController#new as HTML
+  Rendering books/new.html.erb within layouts/application
+  Rendered books/new.html.erb within layouts/application (2.7ms)
+Completed 200 OK in 20ms (Views: 16.4ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/books" for ::1 at 2019-05-11 16:53:15 -0600
+Processing by BooksController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"eLHDFrFnjILr7TJQumnCFA4D6pXvW3hgTbVkvd4hMMGbgP9cM04DLorxKmrZPX83+VdHAVSSo5FdOnKf8b3/Rg==", "book"=>{"title"=>"Not Title", "pages"=>"465", "pub_year"=>"1843", "thumb_url"=>"ksjdgn", "authors"=>"#<Author::ActiveRecord_Associations_CollectionProxy:0x007fb9f6ed9a88>"}, "commit"=>"Add a Book"}
+  [1m[36mBook Load (1.0ms)[0m  [1m[34mSELECT  "books".* FROM "books" WHERE "books"."title" = $1 LIMIT $2[0m  [["title", "Not Title"], ["LIMIT", 1]]
+  [1m[36mAuthor Load (0.4ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."name" = $1 LIMIT $2[0m  [["name", "#<Author::ActiveRecord_Associations_CollectionProxy:0x007fb9f6ed9a88>"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "authors" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "#<Author::ActiveRecord_Associations_CollectionProxy:0x007fb9f6ed9a88>"], ["created_at", "2019-05-11 22:53:15.402454"], ["updated_at", "2019-05-11 22:53:15.402454"]]
+  [1m[35m (39.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mBook Exists (0.5ms)[0m  [1m[34mSELECT  1 AS one FROM "books" WHERE "books"."title" = $1 LIMIT $2[0m  [["title", "Not Title"], ["LIMIT", 1]]
+  [1m[35mSQL (2.7ms)[0m  [1m[32mINSERT INTO "books" ("title", "pages", "pub_year", "thumb_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Not Title"], ["pages", 465], ["pub_year", 1843], ["thumb_url", "ksjdgn"], ["created_at", "2019-05-11 22:53:15.449758"], ["updated_at", "2019-05-11 22:53:15.449758"]]
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "book_authors" ("book_id", "author_id") VALUES ($1, $2) RETURNING "id"[0m  [["book_id", 2], ["author_id", 3]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/books
+Completed 302 Found in 62ms (ActiveRecord: 46.2ms)
+
+
+Started GET "/books" for ::1 at 2019-05-11 16:53:15 -0600
+Processing by BooksController#index as HTML
+  Rendering books/index.html.erb within layouts/application
+  [1m[36mBook Load (0.2ms)[0m  [1m[34mSELECT "books".* FROM "books"[0m
+  [1m[36mAuthor Load (0.4ms)[0m  [1m[34mSELECT "authors".* FROM "authors" INNER JOIN "book_authors" ON "authors"."id" = "book_authors"."author_id" WHERE "book_authors"."book_id" = $1[0m  [["book_id", 1]]
+  [1m[36mAuthor Load (0.3ms)[0m  [1m[34mSELECT "authors".* FROM "authors" INNER JOIN "book_authors" ON "authors"."id" = "book_authors"."author_id" WHERE "book_authors"."book_id" = $1[0m  [["book_id", 2]]
+  Rendered books/index.html.erb within layouts/application (5.0ms)
+Completed 200 OK in 19ms (Views: 15.7ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/books/1" for ::1 at 2019-05-11 16:53:53 -0600
+Processing by BooksController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mBook Load (0.2ms)[0m  [1m[34mSELECT  "books".* FROM "books" WHERE "books"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering books/show.html.erb within layouts/application
+  [1m[36mAuthor Load (0.6ms)[0m  [1m[34mSELECT "authors".* FROM "authors" INNER JOIN "book_authors" ON "authors"."id" = "book_authors"."author_id" WHERE "book_authors"."book_id" = $1[0m  [["book_id", 1]]
+  [1m[36mReview Load (0.4ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."book_id" = $1[0m  [["book_id", 1]]
+  Rendered books/show.html.erb within layouts/application (17.4ms)
+Completed 200 OK in 37ms (Views: 26.2ms | ActiveRecord: 3.9ms)
+
+
+Started GET "/books/hladsafjnsdo.jpg" for ::1 at 2019-05-11 16:53:53 -0600
+Processing by BooksController#show as JPEG
+  Parameters: {"id"=>"hladsafjnsdo"}
+  [1m[36mBook Load (0.3ms)[0m  [1m[34mSELECT  "books".* FROM "books" WHERE "books"."id" = $1 LIMIT $2[0m  [["id", 0], ["LIMIT", 1]]
+Completed 404 Not Found in 24ms (ActiveRecord: 0.3ms)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find Book with 'id'=hladsafjnsdo):
+  
+app/controllers/books_controller.rb:12:in `show'
+Started GET "/books/1/reviews/new" for ::1 at 2019-05-11 16:54:08 -0600
+Processing by ReviewsController#new as HTML
+  Parameters: {"book_id"=>"1"}
+  [1m[36mBook Load (0.2ms)[0m  [1m[34mSELECT  "books".* FROM "books" WHERE "books"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering reviews/new.html.erb within layouts/application
+  Rendered reviews/new.html.erb within layouts/application (6.7ms)
+Completed 200 OK in 21ms (Views: 18.5ms | ActiveRecord: 0.2ms)
+
+
+Started POST "/books/1/reviews" for ::1 at 2019-05-11 16:54:30 -0600
+Processing by ReviewsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"08Zu9sUZtXoKs5nH+ZXl6D9hG2Yj5z3H0M3tE8BoZNsw91K8RzA61muvgf2awVjLyDW28pgu5jbAQvsx7/SrXA==", "review"=>{"user"=>"Mill", "heading"=>"I've read better", "full_review"=>"Dude, tv is better. ", "score"=>"2"}, "commit"=>"Add a Review", "book_id"=>"1"}
+  [1m[36mBook Load (0.5ms)[0m  [1m[34mSELECT  "books".* FROM "books" WHERE "books"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mReview Load (1.0ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."user" = $1[0m  [["user", "Mill"]]
+Redirected to http://localhost:3000/books/1
+Completed 302 Found in 7ms (ActiveRecord: 1.5ms)
+
+
+Started GET "/books/1" for ::1 at 2019-05-11 16:54:30 -0600
+Processing by BooksController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mBook Load (0.2ms)[0m  [1m[34mSELECT  "books".* FROM "books" WHERE "books"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering books/show.html.erb within layouts/application
+  [1m[36mAuthor Load (0.3ms)[0m  [1m[34mSELECT "authors".* FROM "authors" INNER JOIN "book_authors" ON "authors"."id" = "book_authors"."author_id" WHERE "book_authors"."book_id" = $1[0m  [["book_id", 1]]
+  [1m[36mReview Load (0.2ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."book_id" = $1[0m  [["book_id", 1]]
+  Rendered books/show.html.erb within layouts/application (3.2ms)
+Completed 200 OK in 20ms (Views: 16.6ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/books/hladsafjnsdo.jpg" for ::1 at 2019-05-11 16:54:30 -0600
+Processing by BooksController#show as JPEG
+  Parameters: {"id"=>"hladsafjnsdo"}
+  [1m[36mBook Load (0.4ms)[0m  [1m[34mSELECT  "books".* FROM "books" WHERE "books"."id" = $1 LIMIT $2[0m  [["id", 0], ["LIMIT", 1]]
+Completed 404 Not Found in 61ms (ActiveRecord: 0.4ms)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find Book with 'id'=hladsafjnsdo):
+  
+app/controllers/books_controller.rb:12:in `show'
+Started GET "/books/books" for ::1 at 2019-05-11 16:54:47 -0600
+Processing by BooksController#show as HTML
+  Parameters: {"id"=>"books"}
+  [1m[36mBook Load (0.3ms)[0m  [1m[34mSELECT  "books".* FROM "books" WHERE "books"."id" = $1 LIMIT $2[0m  [["id", 0], ["LIMIT", 1]]
+Completed 404 Not Found in 2ms (ActiveRecord: 0.3ms)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find Book with 'id'=books):
+  
+app/controllers/books_controller.rb:12:in `show'
+Started GET "/books/2" for ::1 at 2019-05-11 16:54:54 -0600
+Processing by BooksController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mBook Load (0.3ms)[0m  [1m[34mSELECT  "books".* FROM "books" WHERE "books"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  Rendering books/show.html.erb within layouts/application
+  [1m[36mAuthor Load (0.3ms)[0m  [1m[34mSELECT "authors".* FROM "authors" INNER JOIN "book_authors" ON "authors"."id" = "book_authors"."author_id" WHERE "book_authors"."book_id" = $1[0m  [["book_id", 2]]
+  [1m[36mReview Load (0.2ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."book_id" = $1[0m  [["book_id", 2]]
+  Rendered books/show.html.erb within layouts/application (2.9ms)
+Completed 200 OK in 20ms (Views: 14.8ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/books/ksjdgn" for ::1 at 2019-05-11 16:54:54 -0600
+Processing by BooksController#show as HTML
+  Parameters: {"id"=>"ksjdgn"}
+  [1m[36mBook Load (0.9ms)[0m  [1m[34mSELECT  "books".* FROM "books" WHERE "books"."id" = $1 LIMIT $2[0m  [["id", 0], ["LIMIT", 1]]
+Completed 404 Not Found in 40ms (ActiveRecord: 0.9ms)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find Book with 'id'=ksjdgn):
+  
+app/controllers/books_controller.rb:12:in `show'
+Started GET "/books/2/reviews/new" for ::1 at 2019-05-11 16:54:57 -0600
+Processing by ReviewsController#new as HTML
+  Parameters: {"book_id"=>"2"}
+  [1m[36mBook Load (0.6ms)[0m  [1m[34mSELECT  "books".* FROM "books" WHERE "books"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  Rendering reviews/new.html.erb within layouts/application
+  Rendered reviews/new.html.erb within layouts/application (3.2ms)
+Completed 200 OK in 21ms (Views: 15.3ms | ActiveRecord: 0.6ms)
+
+
+Started POST "/books/2/reviews" for ::1 at 2019-05-11 16:55:16 -0600
+Processing by ReviewsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"1sqcITrEeXAfs0ZYUPmNxi6YS81RbX3bjOVSKBuKEvE1+6BruO323H6vXmIzrTDl2czmWeqkpiqcakQKNBbddg==", "review"=>{"user"=>"Mill", "heading"=>"I've read better.", "full_review"=>"I need Netflix", "score"=>"2"}, "commit"=>"Add a Review", "book_id"=>"2"}
+  [1m[36mBook Load (0.3ms)[0m  [1m[34mSELECT  "books".* FROM "books" WHERE "books"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mReview Load (0.5ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."user" = $1[0m  [["user", "Mill"]]
+Redirected to http://localhost:3000/books/2
+Completed 302 Found in 5ms (ActiveRecord: 0.8ms)
+
+
+Started GET "/books/2" for ::1 at 2019-05-11 16:55:16 -0600
+Processing by BooksController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mBook Load (0.2ms)[0m  [1m[34mSELECT  "books".* FROM "books" WHERE "books"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  Rendering books/show.html.erb within layouts/application
+  [1m[36mAuthor Load (0.2ms)[0m  [1m[34mSELECT "authors".* FROM "authors" INNER JOIN "book_authors" ON "authors"."id" = "book_authors"."author_id" WHERE "book_authors"."book_id" = $1[0m  [["book_id", 2]]
+  [1m[36mReview Load (0.2ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."book_id" = $1[0m  [["book_id", 2]]
+  Rendered books/show.html.erb within layouts/application (2.9ms)
+Completed 200 OK in 19ms (Views: 15.8ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/books/ksjdgn" for ::1 at 2019-05-11 16:55:16 -0600
+Processing by BooksController#show as HTML
+  Parameters: {"id"=>"ksjdgn"}
+  [1m[36mBook Load (0.3ms)[0m  [1m[34mSELECT  "books".* FROM "books" WHERE "books"."id" = $1 LIMIT $2[0m  [["id", 0], ["LIMIT", 1]]
+Completed 404 Not Found in 37ms (ActiveRecord: 0.3ms)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find Book with 'id'=ksjdgn):
+  
+app/controllers/books_controller.rb:12:in `show'
+Started GET "/books/1" for ::1 at 2019-05-11 16:55:35 -0600
+Processing by BooksController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mBook Load (0.2ms)[0m  [1m[34mSELECT  "books".* FROM "books" WHERE "books"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering books/show.html.erb within layouts/application
+  [1m[36mAuthor Load (0.4ms)[0m  [1m[34mSELECT "authors".* FROM "authors" INNER JOIN "book_authors" ON "authors"."id" = "book_authors"."author_id" WHERE "book_authors"."book_id" = $1[0m  [["book_id", 1]]
+  [1m[36mReview Load (0.3ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."book_id" = $1[0m  [["book_id", 1]]
+  Rendered books/show.html.erb within layouts/application (4.2ms)
+Completed 200 OK in 22ms (Views: 17.6ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/books/hladsafjnsdo.jpg" for ::1 at 2019-05-11 16:55:35 -0600
+Processing by BooksController#show as JPEG
+  Parameters: {"id"=>"hladsafjnsdo"}
+  [1m[36mBook Load (8.0ms)[0m  [1m[34mSELECT  "books".* FROM "books" WHERE "books"."id" = $1 LIMIT $2[0m  [["id", 0], ["LIMIT", 1]]
+Completed 404 Not Found in 54ms (ActiveRecord: 8.0ms)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find Book with 'id'=hladsafjnsdo):
+  
+app/controllers/books_controller.rb:12:in `show'
+Started GET "/reviews?name=Mill" for ::1 at 2019-05-11 16:55:38 -0600
+Processing by ReviewsController#index as HTML
+  Parameters: {"name"=>"Mill"}
+  Rendering reviews/index.html.erb within layouts/application
+  [1m[36mReview Load (0.2ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."user" = $1[0m  [["user", "Mill"]]
+  [1m[36mBook Load (0.2ms)[0m  [1m[34mSELECT  "books".* FROM "books" WHERE "books"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered reviews/index.html.erb within layouts/application (3.1ms)
+Completed 200 OK in 21ms (Views: 16.9ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/hladsafjnsdo.jpg" for ::1 at 2019-05-11 16:55:38 -0600
+  
+ActionController::RoutingError (No route matches [GET] "/hladsafjnsdo.jpg"):
+  
+actionpack (5.1.7) lib/action_dispatch/middleware/debug_exceptions.rb:63:in `call'
+web-console (3.7.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.7.0) lib/web_console/middleware.rb:30:in `block in call'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.1.7) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.1.7) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.1.7) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.1.7) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.1.7) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.1.7) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.1.7) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.1.7) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+actionpack (5.1.7) lib/action_dispatch/middleware/request_id.rb:25:in `call'
+rack (2.0.7) lib/rack/method_override.rb:22:in `call'
+rack (2.0.7) lib/rack/runtime.rb:22:in `call'
+activesupport (5.1.7) lib/active_support/cache/strategy/local_cache_middleware.rb:27:in `call'
+actionpack (5.1.7) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.1.7) lib/action_dispatch/middleware/static.rb:125:in `call'
+rack (2.0.7) lib/rack/sendfile.rb:111:in `call'
+railties (5.1.7) lib/rails/engine.rb:522:in `call'
+puma (3.12.1) lib/puma/configuration.rb:227:in `call'
+puma (3.12.1) lib/puma/server.rb:660:in `handle_request'
+puma (3.12.1) lib/puma/server.rb:474:in `process_client'
+puma (3.12.1) lib/puma/server.rb:334:in `block in run'
+puma (3.12.1) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+Started DELETE "/reviews/1" for ::1 at 2019-05-11 16:55:45 -0600
+Processing by ReviewsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"i880UWO2/kWYWuSpd8arJe8JeaNPlIJITJd72JgB1oho/ggb4Z9x6flG/JMUkhYGGF3UN/RdWblcGG36t50ZDw==", "id"=>"1"}
+  [1m[36mReview Load (0.6ms)[0m  [1m[34mSELECT  "reviews".* FROM "reviews" WHERE "reviews"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[31mDELETE FROM "reviews" WHERE "reviews"."id" = $1[0m  [["id", 1]]
+  [1m[35m (5.5ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/reviews
+Completed 302 Found in 11ms (ActiveRecord: 7.0ms)
+
+
+Started GET "/reviews" for ::1 at 2019-05-11 16:55:45 -0600
+Processing by ReviewsController#index as HTML
+  Rendering reviews/index.html.erb within layouts/application
+  [1m[36mReview Load (0.2ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."user" IS NULL[0m
+  Rendered reviews/index.html.erb within layouts/application (1.3ms)
+Completed 200 OK in 16ms (Views: 14.0ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/books/1" for ::1 at 2019-05-11 16:55:56 -0600
+Processing by BooksController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mBook Load (0.3ms)[0m  [1m[34mSELECT  "books".* FROM "books" WHERE "books"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering books/show.html.erb within layouts/application
+  [1m[36mAuthor Load (0.4ms)[0m  [1m[34mSELECT "authors".* FROM "authors" INNER JOIN "book_authors" ON "authors"."id" = "book_authors"."author_id" WHERE "book_authors"."book_id" = $1[0m  [["book_id", 1]]
+  [1m[36mReview Load (0.3ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."book_id" = $1[0m  [["book_id", 1]]
+  Rendered books/show.html.erb within layouts/application (4.0ms)
+Completed 200 OK in 28ms (Views: 23.3ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/books/hladsafjnsdo.jpg" for ::1 at 2019-05-11 16:55:56 -0600
+Processing by BooksController#show as JPEG
+  Parameters: {"id"=>"hladsafjnsdo"}
+  [1m[36mBook Load (0.3ms)[0m  [1m[34mSELECT  "books".* FROM "books" WHERE "books"."id" = $1 LIMIT $2[0m  [["id", 0], ["LIMIT", 1]]
+Completed 404 Not Found in 11ms (ActiveRecord: 0.3ms)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find Book with 'id'=hladsafjnsdo):
+  
+app/controllers/books_controller.rb:12:in `show'
