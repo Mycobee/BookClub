@@ -1,3 +1,7 @@
+<ul id="review-sort-links">
+  <li><%= link_to "Newest Reviews", reviews_path({arg: :newest_reviews, name: @user})%></li>
+  <li><%= link_to "Oldest Reviews", reviews_path({arg: :oldest_reviews, name: @user})%></li>
+</ul>
 <% @reviews.each do |review| %>
 <section id="review-<%= review.id %>" >
   <%= review.user %>

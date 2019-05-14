@@ -1,6 +1,16 @@
 class ReviewsController < ApplicationController
   def index
-    @reviews = Review.where(user: params[:name])
+    if params[:arg] == "newest_reviews"
+      @reviews = Review.where(user: params[:name])
+      @reviews = @reviews.newest_reviews
+    elsif
+      params[:arg] == "oldest_reviews"
+        @reviews = Review.where(user: params[:name])
+        @reviews = @reviews.oldest_reviews
+    else
+      @reviews = Review.where(user: params[:name])
+    end
+      @user = params[:name]
   end
 
   def new

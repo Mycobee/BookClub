@@ -18,7 +18,4 @@ class Review < ApplicationRecord
   def self.newest_reviews
     Review.order(created_at: :desc)
   end
-
-
-
 end
