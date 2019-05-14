@@ -15,6 +15,10 @@ RSpec.describe 'As a visitor on any part of the site except the author show page
 				click_link(@author_1.name)
 				expect(current_path).to eq(author_path(@author_1))
 			end
+			
+			visit(book_path(@book_1))
+			click_link(@author_1.name)
+			expect(current_path).to eq(author_path(@author_1))
 		end
 	end
 end
