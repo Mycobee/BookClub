@@ -10,8 +10,11 @@ RSpec.describe 'As a visitor on any part of the site except the author show page
 	end
 		it 'is a functional link to an author show page' do
 			visit books_path
-			click_link(@author_1.name)
-			expect(current_path).to eq(author_path(@author_1))
+
+			within "#book-#{@book_1.id}" do
+				click_link(@author_1.name)
+				expect(current_path).to eq(author_path(@author_1))
+			end
 		end
 	end
 end
