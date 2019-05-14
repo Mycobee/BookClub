@@ -1,24 +1,44 @@
 <h1><%= @book.title %></h1>
-<ul>
-  <img src=<%= @book.thumb_url %> alt="book pic" width=200>
-  <li><%= @book.pub_year %></li>
-  <li><%= @book.pages %></li>
-</ul>
-<% @authors.each do |author| %>
-<ul>
- <li><%= link_to author.name, author_path(author) %></li>
-</ul>
- <% end %>
-<%= link_to "Add a Review", new_book_review_path(@book) %>
-<h3>Reviews:</h3>
+  <ul>
+    <img src=<%= @book.thumb_url %> alt="book pic" width=200>
+    <li><%= @book.pub_year %></li>
+    <li><%= @book.pages %></li>
+  </ul>
 
-<% @reviews.each do |review|%>
-<ul id="review-<%= review.id %>">
-  <h3><%= link_to review.user, reviews_path(name: review.user) %></h3>
-  <li><%= review.user %></li>
-<li><%= review.heading %></li>
-<li><%= review.score %></li>
-<li><%= review.full_review %></li>
-</ul>
-<% end %>
+    <% @authors.each do |author| %>
+      <ul>
+      <li><%= link_to author.name, author_path(author) %></li>
+      </ul>
+    <% end %>
+  <section id="review-stats">
+    <h3>Overall Average Score: <%= @book.average_rating %></h3>
+    <div id="book-top-three">
+      <% @book.top_three.each do |review| %>
+        <%= link_to review.user, reviews_path(name: review.user) %>
+        <%= review.heading %>
+        <%= review.score %>
+      <% end %>
+    </div>
+
+    <div id="book-lowest-three">
+      <% @book.lowest_three.each do |review| %>
+        <%= link_to review.user, reviews_path(name: review.user) %>
+        <%= review.heading %>
+        <%= review.score %>
+      <% end %>
+    </div>
+  </section>
+
+<%= link_to "Add a Review", new_book_review_path(@book) %>
+
+<h3>Reviews:</h3>
+  <% @reviews.each do |review|%>
+    <ul id="review-<%= review.id %>">
+      <h3><%= link_to review.user, reviews_path(name: review.user) %></h3>
+      <li><%= review.user %></li>
+    <li><%= review.heading %></li>
+    <li><%= review.score %></li>
+    <li><%= review.full_review %></li>
+    </ul>
+  <% end %>
 <%= link_to "Delete Book", book_path(@book), method: :delete %>

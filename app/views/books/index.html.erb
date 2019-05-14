@@ -24,7 +24,7 @@
 
   <article id="most-reviewing-users">
     <% @most_reviewing_users.each do |review| %>
-      <%= review.user %>
+      <%= link_to review.user, reviews_path(name: review.user) %>
       <%= review.count %>
     <% end  %>
   </article>
