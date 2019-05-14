@@ -41,6 +41,28 @@ RSpec.describe Book, type: :model do
 
       expect(book_1.average_rating).to eq(3)
     end
+
+    it '#top_three' do
+        book_1 = Book.create!(title: "The Hobbit", pub_year: 1937, pages: 310, thumb_url: "this_is_a_test_url")
+
+        review_1a= book_1.reviews.create(user: "Mills", heading: "Awesome!", full_review: "Yay", score: 5)
+        review_2a = book_1.reviews.create(user: "Rob", heading: "Awesome!", full_review: "Yay", score: 4)
+        review_3a = book_1.reviews.create(user: "Stella", heading: "Awesome!", full_review: "Yay", score: 3)
+        review_4a = book_1.reviews.create(user: "Vince", heading: "Awesome!", full_review: "Yay", score: 2)
+
+        expect(book_1.top_three).to eq([review_1a, review_2a, review_3a])
+    end
+
+    it '#lowest_three' do
+        book_1 = Book.create!(title: "The Hobbit", pub_year: 1937, pages: 310, thumb_url: "this_is_a_test_url")
+
+        review_1a= book_1.reviews.create(user: "Mills", heading: "Awesome!", full_review: "Yay", score: 5)
+        review_2a = book_1.reviews.create(user: "Rob", heading: "Awesome!", full_review: "Yay", score: 4)
+        review_3a = book_1.reviews.create(user: "Stella", heading: "Awesome!", full_review: "Yay", score: 3)
+        review_4a = book_1.reviews.create(user: "Vince", heading: "Awesome!", full_review: "Yay", score: 2)
+
+        expect(book_1.lowest_three).to eq([review_4a, review_3a, review_2a])
+    end
   end
 
   describe 'class methods' do
@@ -117,8 +139,5 @@ RSpec.describe Book, type: :model do
 
       expect(Book.lowest_rated).to eq([book_1, book_2, book_3])
     end
-
-    
-
   end
 end

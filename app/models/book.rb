@@ -18,13 +18,13 @@ class Book < ApplicationRecord
     self.reviews.average(:score)
   end
 
-  def top_reviews
-
+  def top_three
+    self.reviews.order(score: :desc).limit(3)
   end
 
-  # def lowest_reviews
-  #
-  # end
+  def lowest_three
+    self.reviews.order(:score).limit(3)
+  end
 
   def self.ascending_pages
       Book.order(:pages)
@@ -46,5 +46,9 @@ class Book < ApplicationRecord
 
   def self.highest_rated
     Book.select('books.id, avg(reviews.score)').joins(:reviews).group(:id).order('avg desc').limit(3)
+  end
+
+  def self.lowest_rated
+    Book.select('books.id, avg(reviews.score)').joins(:reviews).group(:id).order('avg asc').limit(3)
   end
 end
