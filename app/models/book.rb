@@ -49,10 +49,10 @@ class Book < ApplicationRecord
   end
 
   def self.highest_rated
-    Book.select('books.id, avg(reviews.score)').joins(:reviews).group(:id).order('avg desc').limit(3)
+    Book.select('books.*, avg(reviews.score)').joins(:reviews).group(:id).order('avg desc').limit(3)
   end
 
   def self.lowest_rated
-    Book.select('books.id, avg(reviews.score)').joins(:reviews).group(:id).order('avg asc').limit(3)
+    Book.select('books.*, avg(reviews.score)').joins(:reviews).group(:id).order('avg asc').limit(3)
   end
 end

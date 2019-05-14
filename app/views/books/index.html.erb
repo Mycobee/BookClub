@@ -1,4 +1,26 @@
 <%= link_to "New Book", new_book_path %>
+<section id="statistics-box">
+  <article id="highest-three-books">
+    <% @highest_three_books.each do |book| %>
+      <%= book.title %>
+      <%= book.average_rating %>
+    <% end  %>
+  </article>
+
+  <article id="lowest-three-books">
+    <% @lowest_three_books.each do |book| %>
+      <%= book.title %>
+      <%= book.average_rating %>
+    <% end  %>
+  </article>
+
+  <article id="most-reviewing-users">
+    <% @most_reviewing_users.each do |review| %>
+      <%= review.user %>
+      <%= review.count %>
+    <% end  %>
+  </article>
+</section>
 <% @books.each do |book|%>
   <div id="book-<%= book.id %>">
     <h1><a href="<%= book_path(book) %>"><%= book.title %></a></h1>
