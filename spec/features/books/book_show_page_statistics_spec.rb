@@ -47,5 +47,13 @@ RSpec.describe 'As a visitor on a book show page' do
         expect(page).to have_content(@review_3a.score)
       end
     end
+
+    it 'shows the overall average rating of all reviews' do
+      visit book_path(@book_1)
+      within("#review-stats") do
+
+        expect(page).to have_content("Overall Average Score: #{@book_1.average_rating}")
+      end
+    end
   end
 end

@@ -11,6 +11,7 @@
       </ul>
     <% end %>
   <section id="review-stats">
+    <h3>Overall Average Score: <%= @book.average_rating %></h3>
     <div id="book-top-three">
       <% @book.top_three.each do |review| %>
         <%= link_to review.user, reviews_path(name: review.user) %>
