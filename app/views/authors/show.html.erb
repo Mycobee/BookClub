@@ -1,14 +1,20 @@
 <h1><%= @author.name %></h1>
   <% @author.books.each do |book| %>
+  <% if book.top_review != nil %>
+    <li>Top Review: </li>
+    <%= link_to book.top_review.user, reviews_path(user: book.top_review.user) %>
+    <%= book.top_review.heading%>
+    <%= book.top_review.score %>
+  <% end %>
   <ul class="author-book" id="author-book-<%= book.id %>">
     <li><%= book.title %></li>
     <li><%= book.pages %></li>
     <li><%= book.pub_year %></li>
-    <% book.authors.each do |author| %>
-      <% if author.name != @author.name %>
-        <p>Co-Authored by:<%= author.name %></p>
+      <% book.authors.each do |author| %>
+        <% if author.name != @author.name %>
+          <p>Co-Authored by:<%= author.name %></p>
+        <% end  %>
       <% end  %>
-    <% end  %>
     <img src=<%= book.thumb_url %>alt="book-pic" width=200>
   </ul>
   <% end %>
