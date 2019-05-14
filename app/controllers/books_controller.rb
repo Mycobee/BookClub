@@ -1,8 +1,23 @@
 class BooksController < ApplicationController
   def index
-    @books = Book.all
-    @highest_three_books = Book.highest_rated
-    @lowest_three_books = Book.lowest_rated
+    if params[:arg] == "highest_rated"
+      @books = Book.highest_rated
+    elsif params[:arg] == "lowest_rated"
+      @books = Book.lowest_rated
+    elsif params[:arg] == "ascending_pages"
+      @books = Book.ascending_pages
+    elsif params[:arg] == "descending_pages"
+      @books = Book.descending_pages
+    elsif params[:arg] == "descending_review_count"
+      @books = Book.descending_review_count
+    elsif params[:arg] == "ascending_review_count"
+      @books = Book.ascending_review_count
+    else
+      @books = Book.all
+    end
+
+    @highest_three_books = Book.highest_three
+    @lowest_three_books = Book.lowest_three
     @most_reviewing_users = Review.most_reviewing_users
   end
 
