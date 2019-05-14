@@ -26,22 +26,27 @@ RSpec.describe 'As a visitor to book index page' do
 
    it 'shows three highest rated, three lowest rated, and three most reviewing users' do
      visit books_path
+save_and_open_page
 
-     within("#highest_three_books") do
+
+     within("#highest-three-books") do
         expect(page).to have_content(@book_1.title)
+        expect(page).to have_content(@book_1.average_rating)
         expect(page).to have_content(@book_2.title)
+        expect(page).to have_content(@book_2.average_rating)
         expect(page).to have_content(@book_3.title)
+        expect(page).to have_content(@book_3.average_rating)
         expect(page).to_not have_content(@book_4.title)
      end
 
-     within("#lowest_three_books") do
+     within("#lowest-three-books") do
         expect(page).to have_content(@book_4.title)
         expect(page).to have_content(@book_3.title)
         expect(page).to have_content(@book_2.title)
         expect(page).to_not have_content(@book_1.title)
      end
 
-     within("#most_reviewing_users") do
+     within("#most-reviewing-users") do
         expect(page).to have_content(@review_1a.user)
         expect(page).to have_content(@review_2a.user)
         expect(page).to have_content(@review_3a.user)
