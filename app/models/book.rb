@@ -26,6 +26,10 @@ class Book < ApplicationRecord
     self.reviews.order(:score).limit(3)
   end
 
+  def top_review
+    self.reviews.order(score: :desc).first
+  end
+
   def self.ascending_pages
       Book.order(:pages)
   end
