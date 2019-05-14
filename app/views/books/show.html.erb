@@ -6,7 +6,7 @@
 </ul>
 <% @authors.each do |author| %>
 <ul>
- <li><%= author.name %></li>
+ <li><%= link_to author.name, author_path(author) %></li>
 </ul>
  <% end %>
 <%= link_to "Add a Review", new_book_review_path(@book) %>
