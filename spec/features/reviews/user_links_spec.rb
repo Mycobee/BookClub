@@ -20,6 +20,12 @@ RSpec.describe 'As a visitor anywhere on the site' do
       click_link(@review_1.user)
 
       expect(current_path).to eq(reviews_path)
+
+      visit author_path(@author_1)
+
+      click_link(@review_1.user)
+
+      expect(current_path).to eq(reviews_path)
     end
   end
 end

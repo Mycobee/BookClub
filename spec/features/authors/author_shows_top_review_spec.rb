@@ -9,12 +9,8 @@ RSpec.describe 'As a visitor on an author show page' do
       @book_2 = @author_1.books.create!(title: "2", pages: 123, pub_year: 1734, thumb_url: "http://www.clipartsuggest.com/images/402/spanish-mission-clipart-http-www-dreamstime-com-royalty-free-stock-SbdxDC-clipart.jpg")
 
       @review_1 = @book_1.reviews.create(user: "mills", heading: "Awesome!", full_review: "Yay", score: 5)
-      visit book_path(@book_1)
-      save_and_open_page
-      visit reviews_path
-      save_and_open_page
+
       visit author_path(@author_1)
-      save_and_open_page
     end
 
     it 'shows the top review' do
