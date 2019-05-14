@@ -1,4 +1,12 @@
 <%= link_to "New Book", new_book_path %>
+<ul id="sort-links">
+  <li><%= link_to "Highest Rated", books_path({arg: :highest_rated}) %></li>
+  <li><%= link_to "Lowest Rated", books_path({arg: :lowest_rated}) %></li>
+  <li><%= link_to "Most Pages", books_path({arg: :descending_pages}) %></li>
+  <li><%= link_to "Least Pages", books_path({arg: :ascending_pages}) %></li>
+  <li><%= link_to "Most Reviewed", books_path({arg: :descending_review_count}) %></li>
+  <li><%= link_to "Least Reviewed", books_path({arg: :ascending_review_count}) %></li>
+</ul>
 <section id="statistics-box">
   <article id="highest-three-books">
     <% @highest_three_books.each do |book| %>
@@ -22,17 +30,19 @@
   </article>
 </section>
 
-<% @books.each do |book|%>
-  <div id="book-<%= book.id %>">
-    <h1><a href="<%= book_path(book) %>"><%= book.title %></a></h1>
-    <p>Publication Year:<%= book.pub_year %></p>
-    <p>Pages:<%= book.pages %></p>
-    <p>Average Rating: <%= book.average_rating %></p>
-    <p>Total Number of Reviews: <%= book.total_reviews %></p>
-    <p><%= book.thumb_url %></p>
+<div id="index-books">
+  <% @books.each do |book|%>
+    <div id="book-<%= book.id %>">
+      <h1><a href="<%= book_path(book) %>"><%= book.title %></a></h1>
+      <p>Publication Year:<%= book.pub_year %></p>
+      <p>Pages:<%= book.pages %></p>
+      <p>Average Rating: <%= book.average_rating %></p>
+      <p>Total Number of Reviews: <%= book.total_reviews %></p>
+      <p><%= book.thumb_url %></p>
 
-    <% book.authors.each do |author| %>
-      <p><%= author.name %></p>
-    <% end %>
-  </div>
-<% end %>
+      <% book.authors.each do |author| %>
+        <p><%= author.name %></p>
+      <% end %>
+    </div>
+  <% end %>
+</div>

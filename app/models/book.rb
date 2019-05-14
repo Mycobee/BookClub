@@ -48,11 +48,20 @@ class Book < ApplicationRecord
     Book.find(book_ids)
   end
 
-  def self.highest_rated
+  def self.highest_three
     Book.select('books.*, avg(reviews.score)').joins(:reviews).group(:id).order('avg desc').limit(3)
   end
 
-  def self.lowest_rated
+  def self.lowest_three
     Book.select('books.*, avg(reviews.score)').joins(:reviews).group(:id).order('avg asc').limit(3)
+  end
+
+
+  def self.highest_rated
+    Book.select('books.*, avg(reviews.score)').joins(:reviews).group(:id).order('avg desc')
+  end
+  
+  def self.lowest_rated
+    Book.select('books.*, avg(reviews.score)').joins(:reviews).group(:id).order('avg asc')
   end
 end

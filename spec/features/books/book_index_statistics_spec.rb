@@ -34,21 +34,18 @@ RSpec.describe 'As a visitor to book index page' do
         expect(page).to have_content(@book_2.average_rating)
         expect(page).to have_content(@book_3.title)
         expect(page).to have_content(@book_3.average_rating)
-        expect(page).to_not have_content(@book_4.title)
      end
 
      within("#lowest-three-books") do
         expect(page).to have_content(@book_4.title)
         expect(page).to have_content(@book_3.title)
         expect(page).to have_content(@book_2.title)
-        expect(page).to_not have_content(@book_1.title)
      end
 
      within("#most-reviewing-users") do
         expect(page).to have_content(@review_1a.user)
         expect(page).to have_content(@review_2a.user)
         expect(page).to have_content(@review_3a.user)
-        expect(page).to_not have_content(@review_4a.user)
      end
    end
  end
