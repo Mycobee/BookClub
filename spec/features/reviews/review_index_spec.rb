@@ -14,8 +14,10 @@ RSpec.describe 'As a visitor on a book show page' do
       @review_3 = @book_1.reviews.create(user: "rob", heading: "Ehhhh", full_review: "Ok, I guess.", score: 3)
 
       visit book_path(@book_1)
-      click_link 'Mills'
-
+      
+      within("#book-top-three") do
+        click_link 'Mills'
+      end
     end
 
     it 'takes me to a user show page containing all headings, full reviews, scores, book titles, thumbnails, and review dates' do
