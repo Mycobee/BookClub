@@ -13,7 +13,10 @@ RSpec.describe 'As a visitor on a user show page' do
       @review_2 = @book_2.reviews.create(user: "mills", heading: "Not good.", full_review: "Boo", score: 1)
 
       visit book_path(@book_1)
-      click_link("Mills")
+
+      within("#book-top-three") do
+        click_link 'Mills'
+      end
     end
 
     it 'returns me to the user show page where the review is deleted' do

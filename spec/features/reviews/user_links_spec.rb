@@ -17,7 +17,9 @@ RSpec.describe 'As a visitor anywhere on the site' do
 
       visit book_path(@book_1)
 
-      click_link(@review_1.user)
+      within("#book-top-three") do
+        click_link @review_1.user
+      end
 
       expect(current_path).to eq(reviews_path)
 

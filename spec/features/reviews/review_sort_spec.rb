@@ -21,7 +21,7 @@ RSpec.describe 'As a visitor on a user show page' do
 
     it 'sorts by oldest reviews first' do
       click_link "Oldest Reviews"
-      save_and_open_page
+  
       expect(page.body.index(@review_1.heading)).to be > (page.body.index(@review_2.heading))
     end
   end
