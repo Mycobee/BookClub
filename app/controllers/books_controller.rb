@@ -4,7 +4,6 @@ class BooksController < ApplicationController
     @highest_three_books = Book.highest_rated
     @lowest_three_books = Book.lowest_rated
     @most_reviewing_users = Review.most_reviewing_users
-    binding.pry
   end
 
   def new

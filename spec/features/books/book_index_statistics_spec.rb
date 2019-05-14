@@ -26,8 +26,6 @@ RSpec.describe 'As a visitor to book index page' do
 
    it 'shows three highest rated, three lowest rated, and three most reviewing users' do
      visit books_path
-save_and_open_page
-
 
      within("#highest-three-books") do
         expect(page).to have_content(@book_1.title)
