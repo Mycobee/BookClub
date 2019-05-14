@@ -22,7 +22,7 @@ RSpec.describe Review, type: :model do
   end
 
   describe 'class methods' do
-    it 'most_reviewing_user' do
+    it '.most_reviewing_user' do
       book_1 = Book.create!(title: "The Hobbit", pub_year: 1937, pages: 310, thumb_url: "this_is_a_test_url")
       book_2 = Book.create!(title: "Not The Hobbit", pub_year: 1937, pages: 310, thumb_url: "this_is_a_test_url")
       book_3 = Book.create!(title: "Sometimes The Hobbit", pub_year: 1937, pages: 310, thumb_url: "this_is_a_test_url")
@@ -51,8 +51,28 @@ RSpec.describe Review, type: :model do
       expect(Review.most_reviewing_users[0].count).to eq(4)
       expect(Review.most_reviewing_users[1].count).to eq(3)
       expect(Review.most_reviewing_users[2].count).to eq(2)
-      
     end
+
+    it '.oldest_reviews' do
+      book_1 = Book.create!(title: "The Hobbit", pub_year: 1937, pages: 310, thumb_url: "this_is_a_test_url")
+
+      review_1= book_1.reviews.create(user: "Mills", heading: "Awesome!", full_review: "Yay", score: 5, created_at: 2.days.ago)
+      review_2 = book_1.reviews.create(user: "Rob", heading: "Nice!", full_review: "Yay", score: 5, created_at: 3.days.ago)
+      review_3 = book_1.reviews.create(user: "Stella", heading: "Cool!", full_review: "Yay", score: 5, created_at: 4.days.ago)
+
+      expect(Review.oldest_reviews).to eq([review_3, review_2, review_1])
+    end
+
+    it '.new_reviews' do
+      book_1 = Book.create!(title: "The Hobbit", pub_year: 1937, pages: 310, thumb_url: "this_is_a_test_url")
+
+      review_1= book_1.reviews.create(user: "Mills", heading: "Awesome!", full_review: "Yay", score: 5, created_at: 2.days.ago)
+      review_2 = book_1.reviews.create(user: "Rob", heading: "Nice!", full_review: "Yay", score: 5, created_at: 3.days.ago)
+      review_3 = book_1.reviews.create(user: "Stella", heading: "Cool!", full_review: "Yay", score: 5, created_at: 4.days.ago)
+
+      expect(Review.newest_reviews).to eq([review_1, review_2, review_3])
+    end
+
   end
 
 
