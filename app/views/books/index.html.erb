@@ -21,12 +21,14 @@
     <% end  %>
   </article>
 </section>
+
 <% @books.each do |book|%>
   <div id="book-<%= book.id %>">
     <h1><a href="<%= book_path(book) %>"><%= book.title %></a></h1>
-
     <p>Publication Year:<%= book.pub_year %></p>
     <p>Pages:<%= book.pages %></p>
+    <p>Average Rating: <%= book.average_rating %></p>
+    <p>Total Number of Reviews: <%= book.total_reviews %></p>
     <p><%= book.thumb_url %></p>
 
     <% book.authors.each do |author| %>
