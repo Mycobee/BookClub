@@ -41,6 +41,7 @@ group :development, :test do
   gem 'pry'
   gem 'active_designer'
   gem 'factory_bot_rails'
+  gem 'simplecov'
 end
 
 group :development do
