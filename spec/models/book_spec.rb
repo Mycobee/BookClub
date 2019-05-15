@@ -32,6 +32,12 @@ RSpec.describe Book, type: :model do
       expect(book_1.total_reviews).to eq(2)
     end
 
+    it '#set-thumb' do
+      book_1 = Book.create!(title: "The Hobbit", pub_year: 1937, pages: 310, thumb_url: "")
+      expect(book_1.thumb_url).to eq("https://i.pinimg.com/236x/cd/d1/30/cdd130816adbd2e8b70c3ed6607fdb0c--clip-art.jpg")
+
+    end
+
     it '#average_rating' do
       book_1 = Book.create!(title: "The Hobbit", pub_year: 1937, pages: 310, thumb_url: "this_is_a_test_url")
       author_1 = book_1.authors.create!(name: "J.R.R. Tolkien")
