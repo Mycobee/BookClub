@@ -1,3 +1,5 @@
+<body background="http://images6.fanpop.com/image/photos/39900000/typewriter-graphic-designs-39950152-1920-1080.png">
+  </body>
 <h1><%= @author.name %></h1>
   <% @author.books.each do |book| %>
   <% if book.top_review != nil %>
@@ -6,7 +8,7 @@
     <%= book.top_review.heading%>
     <%= book.top_review.score %>
   <% end %>
-  
+
   <ul class="author-book" id="author-book-<%= book.id %>">
     <li><%= book.title %></li>
     <li><%= book.pages %></li>
