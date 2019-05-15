@@ -17,7 +17,6 @@ RSpec.describe 'book index page', type: :feature do
       expect(page).to have_content(@book_1.title)
       expect(page).to have_content(@book_1.pub_year)
       expect(page).to have_content(@book_1.pages)
-      expect(page).to have_content(@book_1.thumb_url)
       expect(page).to have_content(@author_1.name)
       expect(page).to have_content(@author_2.name)
     end
@@ -26,7 +25,6 @@ RSpec.describe 'book index page', type: :feature do
       expect(page).to have_content(@book_2.title)
       expect(page).to have_content(@book_2.pub_year)
       expect(page).to have_content(@book_2.pages)
-      expect(page).to have_content(@book_2.thumb_url)
       expect(page).to have_content(@author_3.name)
     end
   end

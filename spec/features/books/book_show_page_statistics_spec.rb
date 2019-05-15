@@ -15,7 +15,7 @@ RSpec.describe 'As a visitor on a book show page' do
     it 'shows the top three reviews' do
       visit book_path(@book_1)
 
-      within("#book-top-three") do
+      within(".book-top-three") do
         expect(page).to have_link(@review_1a.user)
         expect(page).to have_content(@review_1a.heading)
         expect(page).to have_content(@review_1a.score)

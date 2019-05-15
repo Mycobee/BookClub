@@ -17,7 +17,7 @@ RSpec.describe 'As a visitor anywhere on the site' do
 
       visit book_path(@book_1)
 
-      within("#book-top-three") do
+      within(".book-top-three") do
         click_link @review_1.user
       end
 

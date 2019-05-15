@@ -15,7 +15,7 @@ RSpec.describe 'As a visitor on a book show page' do
 
       visit book_path(@book_1)
       
-      within("#book-top-three") do
+      within(".book-top-three") do
         click_link 'Mills'
       end
     end
