@@ -35,7 +35,6 @@ author_5 = book_8.authors.create(name: "Khaled Hosseini")
 
 book_9.authors << author_5
 book_10.authors << author_5
-book_21.authors << author_9
 
 author_6 = book_11.authors.create(name: "Paula Hawkins")
 author_7 = book_12.authors.create(name: "Audrey Niffenegger")
@@ -45,6 +44,7 @@ author_10 = book_15.authors.create(name: "Kurt Vonnegut")
 author_11 = book_16.authors.create(name: "Elie Wiesel")
 author_12 = book_17.authors.create(name: "Robert Galbraith")
 book_18.authors << author_12
+book_21.authors << author_9
 
 author_13 = book_19.authors.create(name: "Junot Diaz")
 author_14 = book_20.authors.create(name: "Anthony Doerr")
@@ -68,11 +68,11 @@ review_14 = book_5.reviews.create(user: "Patrick D.", heading: "Excellent.", ful
 review_15 = book_5.reviews.create(user: "Vince C.", heading: "It's cool, but risky.", full_review: "It's a cool book. You know. Like,...it's alright.", score: 4)
 review_16 = book_6.reviews.create(user: "Zach L.", heading: "Perfection.", full_review: "This book really just reached into my soul and just transported me in a way- guys! I couldn't put it down! So good!", score: 5)
 review_17 = book_6.reviews.create(user: "Brian P.", heading: "The worst.", full_review: "I lost hours of my life. Granted, I only got to page 10, but seriousy....HOURS OF MY LIFE.", score: 2)
-review_18 = book_7.reviews.create(user: "Alexandra C.", heading: "Mediocre.", full_review: "There are books that inspire you, and books that tear your heart to pieces. This book was neither.", score: )
+review_18 = book_7.reviews.create(user: "Alexandra C.", heading: "Mediocre.", full_review: "There are books that inspire you, and books that tear your heart to pieces. This book was neither.", score: 4)
 review_19 = book_7.reviews.create(user: "Andrew J.", heading: "Eh.", full_review: "Felt like reading a damn toaster manual, which isn't a bad thing, except that I didn't get a toaster.", score: 3)
 review_20 = book_8.reviews.create(user: "Billy U.", heading: "I CAN READ!", full_review: "YOU GUYS! I CAN REAAAAAD!!! Book was ok.", score: 3)
 review_21 = book_8.reviews.create(user: "Brian Z.", heading: "Just fine. No more.", full_review: "See above.", score: 3)
-review_22 = book_8.reviews.create(user: "Chris D.", heading: "Moving", full_review: "The unforgettable, heartbreaking story of the unlikely friendship between a wealthy boy and the son of his father’s servant, The Kite Runner is a beautifully crafted novel set in a country that is in the process of being destroyed. It is about the power of reading, the price of betrayal, and the possibility of redemption; and an exploration of the power of fathers over sons—their love, their sacrifices, their lies. Wonderful read.", score: )
+review_22 = book_8.reviews.create(user: "Chris D.", heading: "Moving", full_review: "The unforgettable, heartbreaking story of the unlikely friendship between a wealthy boy and the son of his father’s servant, The Kite Runner is a beautifully crafted novel set in a country that is in the process of being destroyed. It is about the power of reading, the price of betrayal, and the possibility of redemption; and an exploration of the power of fathers over sons—their love, their sacrifices, their lies. Wonderful read.", score: 4)
 review_23 = book_9.reviews.create(user: "James C.", heading: "Nice", full_review: "I liked it.", score: 4)
 review_24 = book_9.reviews.create(user: "Justin D.", heading: "Ok.", full_review: "I've read better.", score: 3)
 review_25 = book_9.reviews.create(user: "Corndog.", heading: "CORN DOOOOOG", full_review: "Reading is boring. I like making memes.", score: 4)
