@@ -38,7 +38,7 @@
       <p>Pages:<%= book.pages %></p>
       <p>Average Rating: <%= book.average_rating %></p>
       <p>Total Number of Reviews: <%= book.total_reviews %></p>
-      <p><%= book.thumb_url %></p>
+      <img src=<%= book.thumb_url %> alt="book pic" width=200>
 
       <% book.authors.each do |author| %>
         <p><%= link_to author.name, author_path(author) %></p>
