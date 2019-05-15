@@ -96,3 +96,5 @@ review_42 = book_17.reviews.create(user: "Stella M.", heading: "HELL YEA!", full
 review_43 = book_18.reviews.create(user: "Person", heading: "I can't", full_review: "I'm out. I got nothing else.", score: 2)
 review_44 = book_18.reviews.create(user: "Robot", heading: "I am a robot", full_review: "01101010110001010100110110101001011", score: 1)
 review_45 = book_19.reviews.create(user: "Out of Names", heading: "Out of titles", full_review: "Out of full reviews", score: 3)
+review_46 = book_19.reviews.create(user: "Out of Names", heading: "Out of titles", full_review: "Out of full reviews", score: 3)
+review_47 = book_22.reviews.create(user: "Robot", heading: "I am a Robot", full_review: "10010011010111011000010101100110010100", score: 1)
