@@ -1,16 +1,19 @@
+<body background="https://131pizza.com/wp-content/uploads/Page-Background-3.jpg">
+
+</body>
 <ul id="review-sort-links">
   <li><%= link_to "Newest Reviews", reviews_path({arg: :newest_reviews, name: @user})%></li>
   <li><%= link_to "Oldest Reviews", reviews_path({arg: :oldest_reviews, name: @user})%></li>
 </ul>
 <% @reviews.each do |review| %>
 <section id="review-<%= review.id %>" >
-  <%= review.user %>
-  <%= review.heading %>
-  <%= review.full_review %>
-  <%= review.score %>
-  <%= review.book.title %>
-<img src="<%= review.book.thumb_url %>" alt="reviewbook-<%= review.book.id %>">
-<%= link_to "Delete Review", review, method: :delete %>
+  <h1> <%= review.user %> </h1><br>
+  <b><%= review.heading %></b><br>
+  <b><%= review.full_review %></b><br>
+  <b><%= review.score %></b><br>
+  <b><%= review.book.title %></b><br>
+<img src="<%= review.book.thumb_url %>" alt="reviewbook-<%= review.book.id %>"><br>
+<%= link_to "Delete Review", review, method: :delete %><br>
   <%= review.created_at %>
 
 </section>
