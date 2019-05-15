@@ -19,11 +19,11 @@ class ReviewsController < ApplicationController
   end
 
   def create
-    @book = Book.find(params[:book_id])
+    book = Book.find(params[:book_id])
     if Review.where(user: review_params[:user].titleize) == []
-      @review = @book.reviews.create(review_params)
+      book.reviews.create(review_params)
     end
-    redirect_to book_path(@book)
+    redirect_to book_path(book)
   end
 
   def destroy

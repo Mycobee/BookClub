@@ -8,7 +8,17 @@ class Book < ApplicationRecord
   validates :pages, presence: true, numericality: true, inclusion: { in: 1..15000 }
   validates :pub_year, presence: true, numericality: true, inclusion: { in: 1455..2025}
 
-  before_save  {self.title = self.title.titleize}
+  before_save  :titleize_title, :set_thumb
+
+  def titleize_title
+    self.title = self.title.titleize
+  end
+
+  def set_thumb
+    if self.thumb_url == ""
+      self.thumb_url = "https://i.pinimg.com/236x/cd/d1/30/cdd130816adbd2e8b70c3ed6607fdb0c--clip-art.jpg"
+    end
+  end 
 
   def total_reviews
     self.reviews.count
