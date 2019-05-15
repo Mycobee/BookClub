@@ -6,7 +6,7 @@
   <li><%= link_to "Oldest Reviews", reviews_path({arg: :oldest_reviews, name: @user})%></li>
 </ul>
 <% @reviews.each do |review| %>
-<section id="review-<%= review.id %>" >
+<section id="review-<%= review.id %>" class="review-card" >
   <h1> <%= review.user %> </h1><br>
   <b><%= review.heading %></b><br>
   <b><%= review.full_review %></b><br>

@@ -1,5 +1,6 @@
 <body background="http://images6.fanpop.com/image/photos/39900000/typewriter-graphic-designs-39950152-1920-1080.png">
-  </body>
+</body>
+<div id="author-box">
 <h1><%= @author.name %></h1>
   <% @author.books.each do |book| %>
   <% if book.top_review != nil %>
@@ -10,16 +11,20 @@
   <% end %>
 
   <ul class="author-book" id="author-book-<%= book.id %>">
-    <li><%= book.title %></li>
-    <li><%= book.pages %></li>
-    <li><%= book.pub_year %></li>
-      <% book.authors.each do |author| %>
-        <% if author.name != @author.name %>
-          <p>Co-Authored by:<%= author.name %></p>
-        <% end  %>
-      <% end  %>
-      <img src=<%= book.thumb_url %> alt="book pic" width=200>
+    <li>Title: <%= book.title %></li>
+    <br>
+    <li>Pages: <%= book.pages %></li>
+    <br>
+    <li>Published: <%= book.pub_year %></li>
+    <br>
+    <% book.authors.each do |author| %>
+    <% if author.name != @author.name %>
+    <p>Co-Authored by: <%= author.name %></p>
+    <% end  %>
+    <% end  %>
+    <img src=<%= book.thumb_url %> alt="book pic" width=200>
   </ul>
   <% end %>
+</div>
 
 <%= link_to "Delete Author", author_path(@author), method: :delete %>

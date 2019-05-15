@@ -1,21 +1,22 @@
 <body background="https://edge.alluremedia.com.au/m/g/2017/12/book-stack.jpg">
 
 </body>
-<h1><%= @book.title %></h1>
-  <ul>
+<ul id="book-show">
+  <h1><%= @book.title %></h1>
     <img src=<%= @book.thumb_url %> alt="book pic" width=200>
-    <li><%= @book.pub_year %></li>
-    <li><%= @book.pages %></li>
-  </ul>
-
+    <li>Published: <%= @book.pub_year %></li>
+    <li>Pages: <%= @book.pages %></li>
+    
     <% @authors.each do |author| %>
-      <ul>
-      <li><%= link_to author.name, author_path(author) %></li>
-      </ul>
+    <ul id="book-show-authors">
+      <li>Author Name: <%= link_to author.name, author_path(author) %></li>
+    </ul>
     <% end %>
+  </ul>
   <section id="review-stats">
+    <div class="book-top-three">
     <h3>Overall Average Score: <%= @book.average_rating %></h3>
-    <div id="book-top-three">
+    <h3>Top Three Reviews</h3>
       <% @book.top_three.each do |review| %>
         <%= link_to review.user, reviews_path(name: review.user) %>
         <%= review.heading %>
@@ -24,6 +25,7 @@
     </div>
 
     <div id="book-lowest-three">
+    <h3>Lowest Three Reviews</h3>
       <% @book.lowest_three.each do |review| %>
         <%= link_to review.user, reviews_path(name: review.user) %>
         <%= review.heading %>
@@ -36,7 +38,7 @@
 
 <h3>Reviews:</h3>
   <% @reviews.each do |review|%>
-    <ul id="review-<%= review.id %>">
+    <ul id="review-<%= review.id %>" class="review-card">
       <h3><%= link_to review.user, reviews_path(name: review.user) %></h3>
       <li><%= review.user %></li>
     <li><%= review.heading %></li>
